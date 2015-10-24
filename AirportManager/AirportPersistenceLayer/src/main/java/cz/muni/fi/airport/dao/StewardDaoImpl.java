@@ -9,12 +9,16 @@ import cz.muni.fi.airport.entity.Steward;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 
 /**
  * Implementation of Data Access Object for entity Steward
  * 
  * @author Sebastian Kupka
  */
+@Transactional
+@Repository
 public class StewardDaoImpl implements StewardDao {
     
     @PersistenceContext
