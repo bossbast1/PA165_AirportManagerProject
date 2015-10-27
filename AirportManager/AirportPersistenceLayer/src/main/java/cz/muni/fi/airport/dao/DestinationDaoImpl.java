@@ -46,8 +46,8 @@ public class DestinationDaoImpl implements DestinationDao{
 
     @Override
     public Destination findByLocation(String location) {
-        return em.createQuery("SELECT d FROM Destination d WHERE location = :location",
-				Destination.class).setParameter(":location", location).getSingleResult();
+        return em.createQuery("SELECT d FROM Destination d WHERE d.location = :location",
+				Destination.class).setParameter("location", location).getSingleResult();
     }
 
     @Override

@@ -28,6 +28,7 @@ public class DestinationTestClass extends AbstractTestNGSpringContextTests {
         destination.create(d);
         List<Destination> destinationList = destination.findAll();
         assert destinationList.size() == 1;
+        assert destination.findByLocation("Brno").equals(d);
         
     }
 }
