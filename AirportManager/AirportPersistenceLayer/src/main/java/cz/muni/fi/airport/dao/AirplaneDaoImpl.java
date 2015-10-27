@@ -23,22 +23,30 @@ public class AirplaneDaoImpl implements AirplaneDao {
 
     @Override
     public void delete(Airplane a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.remove(a);
+    }
+    
+     @Override
+    public void update(Airplane a) {
+        em.merge(a);
     }
 
     @Override
     public List<Airplane> findAllAirplanes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.createQuery("SELECT a FROM Airplane a").getResultList();
     }
 
     @Override
-    public List<Airplane> findAvailableAirplanes(Date from, Date to) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Airplane> findAvailableAirplanes(Date fromDate, Date toDate, String origin) {
+        throw new UnsupportedOperationException("Not ready to use");
+       /* return em.createQuery("SELECT a FROM Airplane a WHERE a NOT IN "
+                + "(SELECT f.airplane FROM Flight f WHERE :from < f.departure OR :to > f.arrival) AND"
+                + " SELECT MAX(f.arrival").getResultList(); //Není hotovo */
     }
 
     @Override
     public Airplane findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.find(Airplane.class, id);
     }
     
 }
