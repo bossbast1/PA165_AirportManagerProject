@@ -1,6 +1,7 @@
 package cz.muni.fi.airport.entity;
 
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class Airplane {
     private Long id;
     
     @NotNull
+    @Column(unique = true, nullable = false)
     private String name;
     
     @NotNull
@@ -70,8 +72,6 @@ public class Airplane {
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + Objects.hashCode(this.getName());
-        hash = 67 * hash + this.getCapacity();
-        hash = 67 * hash + Objects.hashCode(this.getType());
         return hash;
     }
 
@@ -84,14 +84,7 @@ public class Airplane {
             return false;
         }
         final Airplane other = (Airplane) obj;
-        if (!Objects.equals(this.getName(), other.getName())) {
-            return false;
-        }
-        if (this.getCapacity() != other.getCapacity()) {
-            return false;
-        }
-        return Objects.equals(this.getType(), other.getType());
+        return Objects.equals(this.getName(), other.getName());       
     }
-    
-    
+      
 }
