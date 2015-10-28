@@ -5,12 +5,13 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Jakub Stromský
  */
-
+@Repository
 public class AirplaneDaoImpl implements AirplaneDao {
     
     @PersistenceContext
@@ -39,6 +40,7 @@ public class AirplaneDaoImpl implements AirplaneDao {
     @Override
     public List<Airplane> findAvailableAirplanes(Date fromDate, Date toDate, String origin) {
         throw new UnsupportedOperationException("Not ready to use");
+        //TODO Jakub Stromský after flight completion
        /* return em.createQuery("SELECT a FROM Airplane a WHERE a NOT IN "
                 + "(SELECT f.airplane FROM Flight f WHERE :from < f.departure OR :to > f.arrival) AND"
                 + " SELECT MAX(f.arrival").getResultList(); //Není hotovo */

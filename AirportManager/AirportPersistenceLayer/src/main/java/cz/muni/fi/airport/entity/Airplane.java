@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
  *
  * @author Jakub Stromský
  */
-
 @Entity
 public class Airplane {
     
