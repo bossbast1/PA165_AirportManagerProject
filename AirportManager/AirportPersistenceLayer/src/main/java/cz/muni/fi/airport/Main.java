@@ -5,7 +5,7 @@ package cz.muni.fi.airport;
  * @author Kuba Stromský
  */
 public class Main {
-
+    
     /**
      * @param args the command line arguments
      */
