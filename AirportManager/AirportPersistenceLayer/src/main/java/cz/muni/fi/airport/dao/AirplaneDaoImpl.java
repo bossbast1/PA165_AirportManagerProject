@@ -38,15 +38,6 @@ public class AirplaneDaoImpl implements AirplaneDao {
     }
 
     @Override
-    public List<Airplane> findAvailableAirplanes(Date fromDate, Date toDate, String origin) {
-        throw new UnsupportedOperationException("Not ready to use");
-        //TODO Jakub Stromský after flight completion
-       /* return em.createQuery("SELECT a FROM Airplane a WHERE a NOT IN "
-                + "(SELECT f.airplane FROM Flight f WHERE :from < f.departure OR :to > f.arrival) AND"
-                + " SELECT MAX(f.arrival").getResultList(); //Není hotovo */
-    }
-
-    @Override
     public Airplane findById(Long id) {
         return em.find(Airplane.class, id);
     }

@@ -40,16 +40,6 @@ public interface AirplaneDao {
     public List<Airplane> findAllAirplanes();
     
     /**
-     * Finds all available entities of Airplane.
-     * 
-     * @param fromDate date from which airplanes must be available
-     * @param toDate date to which airplanes must be available
-     * @param origin place where airplane must be
-     * @return list of available airplanes in given time interval and place
-     */
-    public List<Airplane> findAvailableAirplanes(Date fromDate, Date toDate, String origin);
-    
-    /**
      * Finds entity of Airplane by given identificator
      * 
      * @param id identificator of airplane
