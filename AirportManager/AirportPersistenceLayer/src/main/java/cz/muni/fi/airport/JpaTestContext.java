@@ -2,6 +2,7 @@ package cz.muni.fi.airport;
 
 import cz.muni.fi.airport.dao.AirplaneDao;
 import cz.muni.fi.airport.dao.DestinationDao;
+import cz.muni.fi.airport.dao.FlightDao;
 import cz.muni.fi.airport.dao.StewardDao;
 import javax.sql.DataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
@@ -24,7 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories
 @ComponentScan(basePackageClasses = {DestinationDao.class, AirplaneDao.class, 
-            StewardDao.class/*, FlightDao.class*/})
+            StewardDao.class, FlightDao.class})
 public class JpaTestContext {
 
     @Bean
