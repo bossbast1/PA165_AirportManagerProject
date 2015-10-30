@@ -14,8 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -41,19 +41,19 @@ public class Flight {
     private Date departure;
     
     @NotNull
-    @OneToOne
+    @ManyToOne
     private Destination origin;
     
     @NotNull
-    @OneToOne
+    @ManyToOne
     private Destination destination;
     
     @NotNull
-    @OneToOne
+    @ManyToOne
     private Airplane airplane;
     
-    @NotNull
-    @OneToMany
+
+    @ManyToMany
     private List<Steward> stewards = new ArrayList<Steward>(); 
     
     public Flight() {       
