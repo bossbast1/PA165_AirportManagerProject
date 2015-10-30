@@ -194,7 +194,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
         
     }
     
-   /* @Test
+    @Test(expectedExceptions = ConstraintViolationException.class)
     public void testNotFilledPersonalIdentificator() {
         Steward s1 = new Steward();
         formatter = new SimpleDateFormat("yyyy/MM/dd");
@@ -213,7 +213,31 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
         s1.setGender(Gender.FEMALE);
         stewardDao.create(s1);
 
-    }*/
+    }
+    
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void testIncorrectlyFilledPersonalIdentificator() {
+        Steward s1 = new Steward();
+        formatter = new SimpleDateFormat("yyyy/MM/dd");
+        Date birth = null;
+        Date employment = null;
+        try {
+            birth = formatter.parse("1988/02/02");
+            employment = formatter.parse("2014/03/01");
+        } catch (ParseException ex) {
+            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        s1.setDateOfBirth(birth);
+        s1.setEmploymentDate(employment);
+        s1.setFirstname("Emma");
+        s1.setSurname("Stevenson");
+        s1.setGender(Gender.FEMALE);
+        
+        s1.setPersonalIdentificator("Invalid");
+        
+        stewardDao.create(s1);
+
+    }
     
     @Test(expectedExceptions = ConstraintViolationException.class)
     public void testNotFilledFirstname() {
