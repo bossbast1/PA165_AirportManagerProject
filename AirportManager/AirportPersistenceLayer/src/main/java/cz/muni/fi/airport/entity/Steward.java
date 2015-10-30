@@ -33,6 +33,7 @@ public class Steward {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
+    @NotNull
     @Column(nullable=false,unique=true)
     @Pattern(regexp="[0-9,A-Z]{3}-\\d{5}")
     private String personalIdentificator;

@@ -142,6 +142,31 @@ public class FlightTestClass extends AbstractTestNGSpringContextTests {
         }
         
         @Test
+        public void testFind() {    
+            
+            Flight f1 = new Flight();
+            f1.setAirplane(a1);
+            f1.setArrival(date2);
+            f1.setDeparture(date1);
+            f1.setOrigin(d1);
+            f1.setDestination(d2);
+            f1.addSteward(s1);
+            f1.addSteward(s2);  
+            
+            Assert.isNull(f1.getId());
+            flightDao.create(f1);
+            f1 = flightDao.findById(f1.getId());
+            Assert.notNull(f1);
+            assert f1.getAirplane().equals(a1);
+            assert f1.getArrival().equals(date2);
+            assert f1.getDeparture().equals(date1);
+            assert f1.getOrigin().equals(d1);
+            assert f1.getDestination().equals(d2);
+            assert f1.getStewards().size() == 2;
+            
+        }
+        
+        @Test
         public void testUpdate() { 
            flightDao.create(f1);
            Assert.notNull(flightDao.findById(f1.getId()));
