@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 @ContextConfiguration(classes = {JpaTestContext.class})
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class DestinationTestClass extends AbstractTestNGSpringContextTests {
+public class DestinationDaoTest extends AbstractTestNGSpringContextTests {
     
     @Autowired
     private DestinationDao destinationDao;

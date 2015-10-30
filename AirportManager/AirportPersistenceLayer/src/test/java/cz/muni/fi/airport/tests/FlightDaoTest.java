@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 @ContextConfiguration(classes = {JpaTestContext.class})
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class FlightTestClass extends AbstractTestNGSpringContextTests {
+public class FlightDaoTest extends AbstractTestNGSpringContextTests {
     
         @Autowired
 	public FlightDao flightDao;

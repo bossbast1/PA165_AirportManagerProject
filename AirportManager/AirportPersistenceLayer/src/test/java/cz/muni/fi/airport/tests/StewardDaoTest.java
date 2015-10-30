@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
 @ContextConfiguration(classes = {JpaTestContext.class})
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class StewardTestClass extends AbstractTestNGSpringContextTests {
+public class StewardDaoTest extends AbstractTestNGSpringContextTests {
     
     @Autowired
     private StewardDao stewardDao;
@@ -55,7 +55,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth = formatter.parse("1988/02/02");
             employment = formatter.parse("2014/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s1.setDateOfBirth(birth);
         s1.setEmploymentDate(employment);
@@ -83,7 +83,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth = formatter.parse("1988/02/02");
             employment = formatter.parse("2014/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s1.setDateOfBirth(birth);
         s1.setEmploymentDate(employment);
@@ -109,7 +109,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth = formatter.parse("1988/02/02");
             employment = formatter.parse("2014/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s1.setDateOfBirth(birth);
         s1.setEmploymentDate(employment);
@@ -134,7 +134,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth = formatter.parse("1988/02/02");
             employment = formatter.parse("2014/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s1.setDateOfBirth(birth);
         s1.setEmploymentDate(employment);
@@ -157,7 +157,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth = formatter.parse("1988/02/02");
             employment = formatter.parse("2014/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s1.setDateOfBirth(birth);
         s1.setEmploymentDate(employment);
@@ -174,7 +174,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth2 = formatter.parse("1985/02/04");
             employment2 = formatter.parse("2013/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s2.setDateOfBirth(birth2);
         s2.setEmploymentDate(employment2);
@@ -204,7 +204,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth = formatter.parse("1988/02/02");
             employment = formatter.parse("2014/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s1.setDateOfBirth(birth);
         s1.setEmploymentDate(employment);
@@ -225,7 +225,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth = formatter.parse("1988/02/02");
             employment = formatter.parse("2014/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s1.setDateOfBirth(birth);
         s1.setEmploymentDate(employment);
@@ -249,7 +249,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth = formatter.parse("1988/02/02");
             employment = formatter.parse("2014/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s1.setDateOfBirth(birth);
         s1.setEmploymentDate(employment);
@@ -269,7 +269,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth = formatter.parse("1988/02/02");
             employment = formatter.parse("2014/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s1.setDateOfBirth(birth);
         s1.setEmploymentDate(employment);
@@ -290,7 +290,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth = formatter.parse("1988/02/02");
             employment = formatter.parse("2014/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s1.setDateOfBirth(birth);
         s1.setEmploymentDate(employment);
@@ -311,7 +311,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth = formatter.parse("1988/02/02");
             employment = formatter.parse("2014/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s1.setEmploymentDate(employment);
         s1.setFirstname("Emma");
@@ -332,7 +332,7 @@ public class StewardTestClass extends AbstractTestNGSpringContextTests {
             birth = formatter.parse("1988/02/02");
             employment = formatter.parse("2014/03/01");
         } catch (ParseException ex) {
-            Logger.getLogger(StewardTestClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StewardDaoTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         s1.setDateOfBirth(birth);
         s1.setFirstname("Emma");
