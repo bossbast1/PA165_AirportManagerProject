@@ -5,7 +5,7 @@
  */
 package cz.muni.fi.airport.entity;
 
-import cz.muni.airport.enums.Gender;
+import cz.muni.fi.airport.enums.Gender;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -34,7 +34,7 @@ public class Steward {
     private Long id;
     
     @Column(nullable=false,unique=true)
-    @Pattern(regexp="\\d{3}-\\d{5}")
+    @Pattern(regexp="[0-9,A-Z]{3}-\\d{5}")
     private String personalIdentificator;
     
     @NotNull

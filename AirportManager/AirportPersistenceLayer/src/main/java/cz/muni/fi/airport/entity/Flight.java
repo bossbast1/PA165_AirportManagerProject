@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.airport.entity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -53,7 +54,7 @@ public class Flight {
     
     @NotNull
     @OneToMany
-    private List<Steward> stewards; 
+    private List<Steward> stewards = new ArrayList<Steward>(); 
     
     public Flight() {       
     }
@@ -183,13 +184,6 @@ public class Flight {
      */
     public List<Steward> getStewards() {
         return Collections.unmodifiableList(stewards);
-    }
-
-    /**
-     * @param stewards the stewards to set
-     */
-    public void setStewards(List<Steward> stewards) {
-        this.stewards = stewards;
     }
     
     public void addSteward(Steward s) {

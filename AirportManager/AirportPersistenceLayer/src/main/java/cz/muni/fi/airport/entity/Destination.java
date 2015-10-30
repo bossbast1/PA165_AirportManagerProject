@@ -62,7 +62,7 @@ public class Destination {
             return false;
         }
         final Destination other = (Destination) obj;
-        if (!Objects.equals(this.location, other.location)) {
+        if (!Objects.equals(this.location, other.getLocation())) {
             return false;
         }
         return true;
