@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.airport.entity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -51,9 +52,9 @@ public class Flight {
     @ManyToOne
     private Airplane airplane;
     
-    @NotNull
+
     @ManyToMany
-    private List<Steward> stewards; 
+    private List<Steward> stewards = new ArrayList<Steward>(); 
     
     public Flight() {       
     }

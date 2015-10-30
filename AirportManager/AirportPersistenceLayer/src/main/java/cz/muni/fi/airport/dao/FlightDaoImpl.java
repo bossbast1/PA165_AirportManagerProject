@@ -10,11 +10,15 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Gabriela Podolnikova
  */
+@Repository
+@Transactional
 public class FlightDaoImpl implements FlightDao {
     
     @PersistenceContext
@@ -48,9 +52,9 @@ public class FlightDaoImpl implements FlightDao {
     @Override
     public List<Flight> listByDate(boolean arrival) {
         if (arrival) {
-            return em.createQuery("SELECT f FROM Flight f SORT BY f.arrival ASC", Flight.class).getResultList();
+            return em.createQuery("SELECT f FROM Flight f ORDER BY f.arrival ASC", Flight.class).getResultList();
         }else {
-            return em.createQuery("SELECT f FROM Flight f SORT BY f.departure ASC", Flight.class).getResultList();
+            return em.createQuery("SELECT f FROM Flight f ORDER BY f.departure ASC", Flight.class).getResultList();
         }
     }
     

@@ -5,10 +5,10 @@
  */
 package cz.muni.fi.airport.tests;
 
-import cz.muni.airport.enums.Gender;
 import cz.muni.fi.airport.JpaTestContext;
 import cz.muni.fi.airport.dao.StewardDao;
 import cz.muni.fi.airport.entity.Steward;
+import cz.muni.fi.airport.enums.Gender;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,10 +24,8 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.annotations.BeforeTest;
 
 
 /**
