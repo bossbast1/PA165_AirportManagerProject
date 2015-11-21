@@ -1,6 +1,7 @@
 package cz.muni.fi.airport.dao;
 
 import cz.muni.fi.airport.entity.Airplane;
+import cz.muni.fi.airport.entity.Flight;
 import java.util.Date;
 import java.util.List;
 
@@ -46,5 +47,31 @@ public interface AirplaneDao {
      * @return airplane with given ID
      */
     public Airplane findById(Long id);
+    
+    /**
+     * Finds entity of Airplane with given name
+     * 
+     * @param name name of airplane
+     * @return airplane with given name
+     */
+    public List<Airplane> findByName(String name);
+    
+    /**
+     * Finds entities of Airplanes which are available in given range of dates. <br>
+     * That means airplanes which don't have any scheduled flight in range of given dates.
+     * 
+     * @param fromDate initial date of interval
+     * @param toDate end date of interval
+     * @return all airplanes which are available in given date interval
+     */
+    public List<Airplane> findAvailableAirplanes(Date fromDate, Date toDate); 
+    
+    /**
+     * Finds last flight of given airplane
+     * 
+     * @param a airplane for which last flight is found
+     * @return last flight of given airplane
+     */
+    public Flight getLastAirplaneFlight(Airplane a);
     
 }

@@ -35,6 +35,8 @@
     
     <modules>
         <module>AirportPersistenceLayer</module>
+        <module>AirportServiceLayer</module>
+        <module>AirportAPI</module>
     </modules>
     
     <properties>
