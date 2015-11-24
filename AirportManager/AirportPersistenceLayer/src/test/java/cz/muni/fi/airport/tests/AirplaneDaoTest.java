@@ -329,7 +329,7 @@ public class AirplaneDaoTest extends AbstractTestNGSpringContextTests {
     }
     
     @Test
-    public void testGetLastAirplaneFlight() throws ParseException {
+    public void testGetLastAirplaneFlights() throws ParseException {
         
         Airplane airplane = new Airplane();
         airplane.setCapacity(10);
@@ -405,8 +405,8 @@ public class AirplaneDaoTest extends AbstractTestNGSpringContextTests {
         flightDao.create(f2);
         flightDao.create(f3);
         
-        Flight lastFlight = airplaneDao.getLastAirplaneFlight(airplane);
-        Assert.notNull(lastFlight);
-        assert lastFlight.equals(f3);
+        List<Flight> lastFlights = airplaneDao.findLastAirplaneFlights(airplane);
+        Assert.notNull(lastFlights);
+        assert lastFlights.size() == 3;
     }
 }

@@ -67,11 +67,11 @@ public interface AirplaneDao {
     public List<Airplane> findAvailableAirplanes(Date fromDate, Date toDate); 
     
     /**
-     * Finds last flight of given airplane
+     * Finds last flights of given airplane
      * 
      * @param a airplane for which last flight is found
-     * @return last flight of given airplane
+     * @return list of last flights of given airplane
      */
-    public Flight getLastAirplaneFlight(Airplane a);
+    public List<Flight> findLastAirplaneFlights(Airplane a);
     
 }

@@ -7,6 +7,7 @@ package cz.muni.fi.airportservicelayer.services;
 
 import cz.muni.fi.airport.dao.AirplaneDao;
 import cz.muni.fi.airport.entity.Airplane;
+import cz.muni.fi.airport.entity.Flight;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -56,8 +57,12 @@ public class AirplaneServiceImpl implements AirplaneService {
     
     @Override
     public List<Airplane> findAvailableAirplanes(Date fromDate, Date toDate) {
-        List<Airplane> availableAirplanes = airplaneDao.findAvailableAirplanes(fromDate, toDate);
-        return availableAirplanes;
+        return airplaneDao.findAvailableAirplanes(fromDate, toDate);
+    }
+    
+    @Override
+    public List<Flight> findAirplaneFlights(Airplane a) {
+        return airplaneDao.findLastAirplaneFlights(a);
     }
 
     //Advanced service
@@ -67,10 +72,10 @@ public class AirplaneServiceImpl implements AirplaneService {
         List<Airplane> specificAirplanes = new ArrayList<>();
         for(Airplane airplane : availableAirplanes) {
             if (airplane.getCapacity() >= capacity
-                    && location.equals(airplaneDao.getLastAirplaneFlight(airplane).getDestination().getLocation())) {
+                    && location.equals(airplaneDao.findLastAirplaneFlights(airplane).get(0).getDestination().getLocation())) {
                 specificAirplanes.add(airplane);
             }
         }
         return specificAirplanes;
-    }    
+    }        
 }

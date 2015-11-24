@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
  *
  * @author Jakub Stromský
  */
-public class AirportCreateDTO {
+public class AirplaneCreationalDTO {
     
     @NotNull
     @Size(min = 5, max = 50)
@@ -69,7 +69,7 @@ public class AirportCreateDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final AirportCreateDTO other = (AirportCreateDTO) obj;
+        final AirplaneCreationalDTO other = (AirplaneCreationalDTO) obj;
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -84,8 +84,5 @@ public class AirportCreateDTO {
         return "AirportCreateDTO{" + "name=" + name 
                 + ", capacity=" + capacity
                 + ", type=" + type + '}';
-    }
-    
-    
-    
+    }   
 }

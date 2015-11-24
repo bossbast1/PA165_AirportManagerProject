@@ -63,11 +63,11 @@ public class AirplaneDaoImpl implements AirplaneDao {
     }
 
     @Override
-    public Flight getLastAirplaneFlight(Airplane a) {
+    public List<Flight> findLastAirplaneFlights(Airplane a) {
         List<Flight> flights = em.createQuery("SELECT f FROM Flight f WHERE f.airplane = :airplane"
                 + " ORDER BY f.arrival DESC", Flight.class).setParameter("airplane", a)
                 .getResultList();
-        return flights.get(0);
+        return flights;
     }
     
 }
