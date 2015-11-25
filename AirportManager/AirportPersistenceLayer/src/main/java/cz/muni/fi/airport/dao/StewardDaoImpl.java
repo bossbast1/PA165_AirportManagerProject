@@ -38,6 +38,11 @@ public class StewardDaoImpl implements StewardDao {
     public void remove(Steward steward) throws IllegalArgumentException {
         em.remove(findById(steward.getId()));
     }
+    
+    @Override
+    public void remove(Long id) throws IllegalArgumentException {
+        em.remove(findById(id));
+    }
 
     @Override
     public Steward findById(Long id) {
@@ -45,7 +50,7 @@ public class StewardDaoImpl implements StewardDao {
     }
 
     @Override
-    public Steward findIdentificator(String identificator) {
+    public Steward findByIdentificator(String identificator) {
         return em.createQuery("SELECT s FROM Steward s WHERE s.personalIdentificator like :pi ",
 				Steward.class).setParameter("pi", "%" + identificator + "%").getSingleResult();
     }
@@ -53,6 +58,14 @@ public class StewardDaoImpl implements StewardDao {
     @Override
     public List<Steward> findAll() {
         return em.createQuery("SELECT s FROM Steward s", Steward.class).getResultList();
+    }
+
+    @Override
+    public List<Steward> findByName(String name, String surname) {
+        return em.createQuery("SELECT s FROM Steward s WHERE s.firstname = :name AND s.surname = :surname", Steward.class)
+                .setParameter("name", name)
+                .setParameter("surname", surname)
+                .getResultList();
     }
     
 }

@@ -53,10 +53,10 @@ public class AirplaneDTO {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + Objects.hashCode(this.name);
-        hash = 67 * hash + this.capacity;
-        hash = 67 * hash + Objects.hashCode(this.type);
+        hash = 67 * hash + Objects.hashCode(this.getId());
+        hash = 67 * hash + Objects.hashCode(this.getName());
+        hash = 67 * hash + this.getCapacity();
+        hash = 67 * hash + Objects.hashCode(this.getType());
         return hash;
     }
 
@@ -65,20 +65,20 @@ public class AirplaneDTO {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (obj instanceof AirplaneDTO) {
             return false;
         }
         final AirplaneDTO other = (AirplaneDTO) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.getId(), other.getId())) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
+        if (!Objects.equals(this.getName(), other.getName())) {
             return false;
         }
-        if (this.capacity != other.capacity) {
+        if (this.getCapacity() != other.getCapacity()) {
             return false;
         }
-        return Objects.equals(this.type, other.type);
+        return Objects.equals(this.getType(), other.getType());
     }
        
 }

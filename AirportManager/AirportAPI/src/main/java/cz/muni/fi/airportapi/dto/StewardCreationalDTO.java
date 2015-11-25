@@ -3,66 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.airport.entity;
+package cz.muni.fi.airportapi.dto;
 
 import cz.muni.fi.airport.enums.Gender;
 import java.util.Date;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
- * Class representing the entity of steward
- * 
+ *
  * @author Sebastian Kupka
  */
-@Entity
-public class Steward {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+public class StewardCreationalDTO {
     
     @NotNull
-    @Column(nullable=false,unique=true)
     @Pattern(regexp="[0-9,A-Z]{3}-\\d{5}")
     private String personalIdentificator;
-    
     @NotNull
+    @Size(min=1, max=50)
     private String firstname;
-    
     @NotNull
+    @Size(min=1, max=50) 
     private String surname;
-    
     @NotNull
-    @Enumerated(EnumType.STRING)
     private Gender gender;
-
     @NotNull
-    @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
-    
     @NotNull
-    @Temporal(TemporalType.DATE)
     private Date employmentDate;
-
-    /**
-     * Gets the entity Database ID
-     * @return personal identificator
-     */
-    public Long getId() {
-        return id;
-    }
 
     /**
      * Gets the personal identificator of steward
@@ -172,13 +142,25 @@ public class Steward {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Steward)) {
+        if (!(obj instanceof StewardCreationalDTO)) {
             return false;
         }
-        final Steward other = (Steward) obj;
-        if (!Objects.equals(this.personalIdentificator, other.getPersonalIdentificator())) {
+        final StewardCreationalDTO other = (StewardCreationalDTO) obj;
+        if (!Objects.equals(this.getPersonalIdentificator(), other.getPersonalIdentificator())) {
             return false;
         }
         return true;
-    } 
+    }
+
+    @Override
+    public String toString() {
+        return "StewardCreationalDTO{" + 
+                "personalIdentificator=" + personalIdentificator + 
+                ", firstname=" + firstname + 
+                ", surname=" + surname + 
+                ", gender=" + gender + 
+                ", dateOfBirth=" + dateOfBirth + 
+                ", employmentDate=" + employmentDate + 
+                '}';
+    }
 }

@@ -35,6 +35,12 @@ public interface StewardDao {
     public void remove(Steward steward);
     
     /**
+     * Removes the entity of Steward
+     * @param id identificator of Steward
+     */
+    public void remove(Long id);
+    
+    /**
      * Finds the entity of steward by its ID
      * @param id identificator of steward
      * @return steward with given ID
@@ -45,7 +51,15 @@ public interface StewardDao {
      * @param identificator personal identificator of steward
      * @return steward with given ID
      */
-    public Steward findIdentificator(String identificator);
+    public Steward findByIdentificator(String identificator);
+    
+    /**
+     * Lists the entities of steward by its first and second name
+     * @param name first name
+     * @param surname second name
+     * @return 
+     */
+    public List<Steward> findByName(String name, String surname);
     
     /**
      * lists all persisted stewards entities
