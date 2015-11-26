@@ -8,15 +8,18 @@ package cz.muni.fi.airportservicelayer.services;
 import cz.muni.fi.airport.dao.DestinationDao;
 import cz.muni.fi.airport.entity.Destination;
 import java.util.List;
-import javax.inject.Inject;
+//import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Michal Zbranek
  */
+@Service
 public class DestinationServiceImpl implements DestinationService{
 
-    @Inject
+    @Autowired
     private DestinationDao destinationDao;
     
     @Override

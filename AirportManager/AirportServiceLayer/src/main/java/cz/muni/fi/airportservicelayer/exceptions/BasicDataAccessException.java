@@ -17,4 +17,8 @@ public class BasicDataAccessException extends DataAccessException {
         super("Exception on PersistanceLayer", cause);
     }
     
+    public BasicDataAccessException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
+    
 }

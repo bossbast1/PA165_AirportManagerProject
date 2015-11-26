@@ -52,6 +52,9 @@ public class AirplaneDaoImpl implements AirplaneDao {
         
     @Override
     public List<Airplane> findAvailableAirplanes(Date fromDate, Date toDate) {
+        if(fromDate.after(toDate)) {
+            throw new IllegalArgumentException("From date must be before to date");
+        }
         return em.createQuery("SELECT a FROM Airplane a WHERE a NOT IN "
                 + "(SELECT f.airplane FROM Flight f WHERE "
                 + "(f.arrival BETWEEN :fromDate AND :toDate)"
@@ -63,7 +66,7 @@ public class AirplaneDaoImpl implements AirplaneDao {
     }
 
     @Override
-    public List<Flight> findLastAirplaneFlights(Airplane a) {
+    public List<Flight> findAirplaneFlights(Airplane a) {
         List<Flight> flights = em.createQuery("SELECT f FROM Flight f WHERE f.airplane = :airplane"
                 + " ORDER BY f.arrival DESC", Flight.class).setParameter("airplane", a)
                 .getResultList();
