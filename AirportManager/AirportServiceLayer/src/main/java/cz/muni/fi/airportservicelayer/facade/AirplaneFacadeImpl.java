@@ -50,9 +50,10 @@ public class AirplaneFacadeImpl implements AirplaneFacade {
     }
 
     @Override
-    public void createAirplane(AirplaneCreationalDTO a) {
+    public Long createAirplane(AirplaneCreationalDTO a) {
         Airplane mappedAirplane = beanMappingservice.mapTo(a, Airplane.class);
         airplaneService.create(mappedAirplane);
+        return mappedAirplane.getId();
     }
 
     @Override
@@ -83,7 +84,5 @@ public class AirplaneFacadeImpl implements AirplaneFacade {
         return beanMappingservice.mapTo(airplaneService.findSpecificAirplanes(from, to, capacity, location)
                 , AirplaneDTO.class);
     }
-    
-    
-    
+       
 }

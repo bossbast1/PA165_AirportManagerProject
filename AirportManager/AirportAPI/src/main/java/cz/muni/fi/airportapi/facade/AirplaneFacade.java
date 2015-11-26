@@ -20,7 +20,7 @@ public interface AirplaneFacade {
     public AirplaneDTO getAirplaneWithId(Long id);
     public List<AirplaneDTO> getAllAirplanes();
     public List<AirplaneDTO> getAirplaneWithName(String name);
-    public void createAirplane(AirplaneCreationalDTO a);
+    public Long createAirplane(AirplaneCreationalDTO a);
     public void removeAirplane(Long id);
     public void updateAirplaneCapacity(UpdateAirplaneCapacityDTO update);
     public List<AirplaneDTO> getAvailableAirplanes(Date from, Date to);
