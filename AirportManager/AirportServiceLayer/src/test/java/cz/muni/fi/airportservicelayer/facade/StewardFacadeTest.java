@@ -12,6 +12,8 @@ import cz.muni.fi.airportapi.dto.FlightDTO;
 import cz.muni.fi.airportapi.dto.StewardCreationalDTO;
 import cz.muni.fi.airportapi.dto.StewardDTO;
 import cz.muni.fi.airportapi.dto.UpdateStewardNameDTO;
+import cz.muni.fi.airportapi.facade.DestinationFacade;
+import cz.muni.fi.airportapi.facade.FlightFacade;
 import cz.muni.fi.airportapi.facade.StewardFacade;
 import cz.muni.fi.airportservicelayer.config.ServiceTestConfiguration;
 import java.text.ParseException;
@@ -42,6 +44,12 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
     
     @Autowired
     private StewardFacade stewardFacade;
+    
+    @Autowired
+    private FlightFacade flightFacade;
+    
+    @Autowired
+    private DestinationFacade destinationFacade;
     
     private StewardCreationalDTO s1;
     private StewardCreationalDTO s2;
@@ -120,7 +128,6 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
         assert result.size() == 1;
         assert result.get(0).getFirstname().equals(steward.getFirstname());
         assert result.get(0).getSurname().equals(steward.getSurname());
-        
     }
 
     @Test
@@ -168,6 +175,11 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
 
     @Test
     public void testGetStewardFlights() {
+        // TODO
+    }
+    
+    @Test
+    public void testFindSpecificStewards() {
         // TODO
     }
 }

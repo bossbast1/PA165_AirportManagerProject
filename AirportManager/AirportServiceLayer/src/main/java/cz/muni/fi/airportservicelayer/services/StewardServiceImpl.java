@@ -5,10 +5,14 @@
  */
 package cz.muni.fi.airportservicelayer.services;
 
+import cz.muni.fi.airport.dao.DestinationDao;
 import cz.muni.fi.airport.dao.StewardDao;
+import cz.muni.fi.airport.entity.Destination;
 import cz.muni.fi.airport.entity.Flight;
 import cz.muni.fi.airport.entity.Steward;
 import cz.muni.fi.airportservicelayer.exceptions.BasicDataAccessException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.dao.DataAccessException;
@@ -23,6 +27,9 @@ public class StewardServiceImpl implements StewardService {
     
     @Inject
     private StewardDao stewardDao;
+    
+    @Inject
+    private DestinationDao destinationDao;
 
     @Override
     public Steward findById(Long id) {
@@ -61,12 +68,55 @@ public class StewardServiceImpl implements StewardService {
     }
 
     @Override
-    public List<Steward> getAvailableStewardsAtLocation(Long locationId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Flight> getStewardFlights(Long id) {
+        return this.findStewardFlights(stewardDao.findById(id));
+    } 
+    
+    @Override
+    public List<Steward> findAvailableStewards(Date fromDate, Date toDate) {
+        return stewardDao.findAvailableStewards(fromDate, toDate);
+    }
+    
+    @Override
+    public List<Flight> findStewardFlights(Steward steward) {
+        return stewardDao.findLastStewardFlights(steward);
     }
 
+    //Advanced service
     @Override
-    public List<Flight> getStewardFlights(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }  
+    public List<Steward> findSpecificStewards(Date fromDate, Date toDate, Long locationId) {
+        List<Steward> availableStewards = null;
+        if (fromDate != null || toDate != null) {
+            if (fromDate == null) {
+                fromDate = new Date();
+            }
+            
+            if (toDate == null) {
+                toDate = new Date();
+            }
+            availableStewards = this.findAvailableStewards(fromDate, toDate);
+        } else {
+            availableStewards = this.getAllStewards();
+        }
+        if (locationId != null) {
+            return findSpecificStewards(availableStewards, locationId);
+        } else {
+            return availableStewards;
+        }
+    }
+    
+    @Override
+    public List<Steward> findAvailableStewardsAtLocation(long locationId) {
+        return this.findSpecificStewards(null, null, locationId);
+    }
+
+    private List<Steward> findSpecificStewards(List<Steward> availableStewards, long locationId) {
+        List<Steward> specificAirplanes = new ArrayList<>();
+        for(Steward steward : availableStewards) {
+            if (new Long(locationId).equals(stewardDao.findLastStewardFlights(steward).get(0).getDestination().getId())) {
+                specificAirplanes.add(steward);
+            }
+        }
+        return specificAirplanes;
+    }
 }

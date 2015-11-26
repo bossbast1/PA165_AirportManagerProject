@@ -32,6 +32,11 @@ public class Steward {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
+    // Setter pre testy
+    public void setId(Long id) {
+        this.id = id;
+    } 
     
     @NotNull
     @Column(nullable=false,unique=true)

@@ -5,7 +5,10 @@
  */
 package cz.muni.fi.airport.dao;
 
+import cz.muni.fi.airport.entity.Airplane;
+import cz.muni.fi.airport.entity.Flight;
 import cz.muni.fi.airport.entity.Steward;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -68,4 +71,23 @@ public class StewardDaoImpl implements StewardDao {
                 .getResultList();
     }
     
+    @Override
+    public List<Steward> findAvailableStewards(Date fromDate, Date toDate) {
+        return em.createQuery("SELECT s FROM Steward s WHERE s NOT IN "
+                + "(SELECT fs FROM Flight f JOIN f.stewards fs WHERE "
+                + "(f.arrival BETWEEN :fromDate AND :toDate)"
+                + " OR (f.departure BETWEEN :fromDate AND :toDate)"
+                + " OR (f.departure <= :fromDate AND f.arrival >= :toDate))")
+                .setParameter("fromDate", fromDate)
+                .setParameter("toDate", toDate)
+                .getResultList();
+    }
+
+    @Override
+    public List<Flight> findLastStewardFlights(Steward steward) {
+        List<Flight> flights = em.createQuery("SELECT f FROM Flight f JOIN f.stewards fs WHERE fs.id = :stewardId"
+                + " ORDER BY f.arrival DESC", Flight.class).setParameter("stewardId", steward.getId())
+                .getResultList();
+        return flights;
+    }  
 }

@@ -5,7 +5,9 @@
  */
 package cz.muni.fi.airport.dao;
 
+import cz.muni.fi.airport.entity.Flight;
 import cz.muni.fi.airport.entity.Steward;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,4 +68,8 @@ public interface StewardDao {
      * @return all stewards entities
      */
     public  List<Steward> findAll();
+    
+    public List<Steward> findAvailableStewards(Date fromDate, Date toDate);  
+
+    public List<Flight> findLastStewardFlights(Steward steward);
 }

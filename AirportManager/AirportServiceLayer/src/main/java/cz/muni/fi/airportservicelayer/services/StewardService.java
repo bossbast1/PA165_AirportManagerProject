@@ -7,6 +7,7 @@ package cz.muni.fi.airportservicelayer.services;
 
 import cz.muni.fi.airport.entity.Flight;
 import cz.muni.fi.airport.entity.Steward;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,16 +62,43 @@ public interface StewardService {
     public void updateSteward(Steward update);
     
     /**
-     * Lists all Stewards at given location.
-     * @param locationId identificator of the destination.
-     * @return 
-     */
-    public List<Steward> getAvailableStewardsAtLocation(Long locationId);
-    
-    /**
      * Lists all flights for given Steward
      * @param id Steward's identificator
      * @return List of all flights for given Steward
      */
     public List<Flight> getStewardFlights(Long id);   
+    
+    
+    /**
+     * Finds stewards, that are not assigned to a flight during given period
+     * @param fromDate available from
+     * @param toDate available to
+     * @return 
+     */
+    public List<Steward> findAvailableStewards(Date fromDate, Date toDate);
+    
+    /**
+     * Find Flight history for given steward
+     * @param steward
+     * @return 
+     */
+    public List<Flight> findStewardFlights(Steward steward);
+
+    //Advanced service
+    
+    /**
+     * Lists all Stewards at given location during given period.
+     * @param fromDate available from
+     * @param toDate available to
+     * @param locationId identificator of the destination.
+     * @return 
+     */
+    public List<Steward> findSpecificStewards(Date fromDate, Date toDate, Long locationId);
+    
+    /**
+     * Lists all Stewards at given location.
+     * @param locationId identificator of the destination.
+     * @return 
+     */
+    public List<Steward> findAvailableStewardsAtLocation(long locationId);
 }

@@ -64,7 +64,7 @@ public interface StewardFacade {
     public void updateStewardName(UpdateStewardNameDTO update);
     
     /**
-     * Gets all Stewards at given location.
+     * Gets all Stewards' DTO at given location.
      * @param locationId identificator of the destination.
      * @return 
      */
@@ -76,4 +76,13 @@ public interface StewardFacade {
      * @return 
      */
     public List<FlightDTO> getStewardFlights(Long id);
+    
+    /**
+     * Lists all Stewards' DTO at given location during given period.
+     * @param fromDate available from
+     * @param toDate available to
+     * @param locationId identificator of the destination.
+     * @return 
+     */
+    public List<StewardDTO> findSpecificStewards(Date fromDate, Date toDate, Long locationId);
 }

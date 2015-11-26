@@ -13,6 +13,7 @@ import cz.muni.fi.airportapi.dto.UpdateStewardNameDTO;
 import cz.muni.fi.airportapi.facade.StewardFacade;
 import cz.muni.fi.airportservicelayer.services.BeanMappingService;
 import cz.muni.fi.airportservicelayer.services.StewardService;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
@@ -77,12 +78,17 @@ public class StewardFacadeImpl implements StewardFacade {
 
     @Override
     public List<StewardDTO> getAvailableStewardsAtLocation(Long locationId) {
-        return beanMappingservice.mapTo(stewardService.getAvailableStewardsAtLocation(locationId), StewardDTO.class);
+        return beanMappingservice.mapTo(stewardService.findAvailableStewardsAtLocation(locationId), StewardDTO.class);
     }
 
     @Override
     public List<FlightDTO> getStewardFlights(Long id) {
         return beanMappingservice.mapTo(stewardService.getStewardFlights(id), FlightDTO.class);
+    }
+    
+    @Override
+    public List<StewardDTO> findSpecificStewards(Date fromDate, Date toDate, Long locationId) {
+        return beanMappingservice.mapTo(stewardService.findSpecificStewards(fromDate, toDate, locationId), StewardDTO.class);
     }
     
 }
