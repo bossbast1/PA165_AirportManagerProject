@@ -5,10 +5,17 @@
  */
 package cz.muni.fi.airportservicelayer.facade;
 
+import cz.muni.fi.airportapi.facade.FlightFacade;
+import cz.muni.fi.airportservicelayer.services.BeanMappingService;
+import javax.inject.Inject;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author Kuba
  */
-public class FlightFacadeImpl {
-    
+@Service
+@Transactional
+public class FlightFacadeImpl implements FlightFacade {
 }

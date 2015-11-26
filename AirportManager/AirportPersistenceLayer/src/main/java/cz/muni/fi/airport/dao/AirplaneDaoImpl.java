@@ -68,6 +68,5 @@ public class AirplaneDaoImpl implements AirplaneDao {
                 + " ORDER BY f.arrival DESC", Flight.class).setParameter("airplane", a)
                 .getResultList();
         return flights;
-    }
-    
+    }  
 }

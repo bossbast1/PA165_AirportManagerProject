@@ -6,11 +6,12 @@
 package cz.muni.fi.airport.tests;
 
 import cz.muni.fi.airport.JpaTestContext;
-import cz.muni.fi.airport.dao.StewardDao;
-import cz.muni.fi.airport.entity.Steward;
+import cz.muni.fi.airport.dao.*;
+import cz.muni.fi.airport.entity.*;
 import cz.muni.fi.airport.enums.Gender;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,7 +39,16 @@ import org.testng.annotations.Test;
 public class StewardDaoTest extends AbstractTestNGSpringContextTests {
     
     @Autowired
-    private StewardDao stewardDao;
+    private AirplaneDao airplaneDao;
+    
+    @Autowired
+    private FlightDao flightDao;
+    
+    @Autowired
+    public DestinationDao destinationDao;
+        
+    @Autowired
+    public StewardDao stewardDao;
     
     Steward s1;
     Steward s2;
@@ -444,5 +454,224 @@ public class StewardDaoTest extends AbstractTestNGSpringContextTests {
         s2.setPersonalIdentificator("123-12345");
         stewardDao.create(s1);
         stewardDao.create(s2);
+    }
+    
+    @Test
+    public void testFindAvailableStewards() throws ParseException {
+        Airplane airA = new Airplane();
+        airA.setCapacity(10);
+        airA.setName("airA");
+        airA.setType("typeA");
+        
+        airplaneDao.create(airA);
+        
+        Destination d1 = new Destination();
+        d1.setLocation("Brno");
+
+        Destination d2 = new Destination();
+        d2.setLocation("Praha");
+
+        destinationDao.create(d1);
+        destinationDao.create(d2);
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        
+        Steward s1 = new Steward();
+        s1.setFirstname("fn1");
+        s1.setSurname("sn1");
+        s1.setPersonalIdentificator("111-11111");
+        s1.setDateOfBirth(formatter.parse("1988/02/02"));
+        s1.setEmploymentDate(formatter.parse("2014/03/01"));
+        s1.setGender(Gender.MALE);
+
+        Steward s2 = new Steward();
+        s2.setFirstname("fn2");
+        s2.setSurname("sn1");
+        s2.setPersonalIdentificator("111-11112");
+        s2.setDateOfBirth(formatter.parse("1988/02/02"));
+        s2.setEmploymentDate(formatter.parse("2014/03/01"));
+        s2.setGender(Gender.MALE);
+
+        Steward awaibleS1 = new Steward();
+        awaibleS1.setFirstname("fn2");
+        awaibleS1.setSurname("sn3");
+        awaibleS1.setPersonalIdentificator("111-11113");
+        awaibleS1.setDateOfBirth(formatter.parse("1988/02/02"));
+        awaibleS1.setEmploymentDate(formatter.parse("2014/03/01"));
+        awaibleS1.setGender(Gender.FEMALE);
+
+        Steward awaibleS2 = new Steward();
+        awaibleS2.setFirstname("fn2");
+        awaibleS2.setSurname("sn3");
+        awaibleS2.setPersonalIdentificator("111-11114");
+        awaibleS2.setDateOfBirth(formatter.parse("1988/02/02"));
+        awaibleS2.setEmploymentDate(formatter.parse("2014/03/01"));
+        awaibleS2.setGender(Gender.FEMALE);
+
+        stewardDao.create(s1);
+        stewardDao.create(s2);
+        stewardDao.create(awaibleS1);
+        stewardDao.create(awaibleS2);
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(2015, 1, 6, 2, 0); //YY MM DD 0 january
+        Date date1 = cal.getTime();
+        cal.set(2015, 1, 18, 2, 0);
+        Date date2 = cal.getTime();
+        
+        cal.set(2015, 1, 5, 0, 0);
+        Date date3 = cal.getTime();
+        cal.set(2015, 1, 10, 0, 0);
+        Date date4 = cal.getTime();
+        
+        cal.set(2015, 1, 11, 0, 0);
+        Date date5 = cal.getTime();
+        cal.set(2015, 1, 13, 0, 0);
+        Date date6 = cal.getTime();
+        
+        cal.set(2015, 1, 14, 0, 0);
+        Date date7 = cal.getTime();
+        cal.set(2015, 1, 17, 0, 0);
+        Date date8 = cal.getTime();
+        
+        cal.set(2015, 1, 8, 0, 0);
+        Date from = cal.getTime();
+        cal.set(2015, 1, 15, 0, 0);
+        Date to = cal.getTime();
+        
+
+        Flight f1 = new Flight();
+        f1.setAirplane(airA);
+        f1.setArrival(date2);
+        f1.setDeparture(date1);
+        f1.setOrigin(d1);
+        f1.setDestination(d2);
+        f1.addSteward(s1);
+        f1.addSteward(s2);
+
+        Flight f2 = new Flight();
+        f2.setAirplane(airA);
+        f2.setArrival(date4);
+        f2.setDeparture(date3);
+        f2.setOrigin(d1);
+        f2.setDestination(d2);
+        f2.addSteward(s2);
+        
+        flightDao.create(f1);
+        flightDao.create(f2);
+
+        List<Steward> availableStewards = stewardDao.findAvailableStewards(from, to);
+        assert availableStewards.size() == 2;
+    }
+    
+    @Test
+    public void testfindLastStewardFlights() throws ParseException {
+        Airplane airA = new Airplane();
+        airA.setCapacity(10);
+        airA.setName("airA");
+        airA.setType("typeA");
+        
+        airplaneDao.create(airA);
+        
+        Destination d1 = new Destination();
+        d1.setLocation("Brno");
+
+        Destination d2 = new Destination();
+        d2.setLocation("Praha");
+
+        destinationDao.create(d1);
+        destinationDao.create(d2);
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        
+        Steward s1 = new Steward();
+        s1.setFirstname("fn1");
+        s1.setSurname("sn1");
+        s1.setPersonalIdentificator("111-11111");
+        s1.setDateOfBirth(formatter.parse("1988/02/02"));
+        s1.setEmploymentDate(formatter.parse("2014/03/01"));
+        s1.setGender(Gender.MALE);
+
+        Steward s2 = new Steward();
+        s2.setFirstname("fn2");
+        s2.setSurname("sn1");
+        s2.setPersonalIdentificator("111-11112");
+        s2.setDateOfBirth(formatter.parse("1988/02/02"));
+        s2.setEmploymentDate(formatter.parse("2014/03/01"));
+        s2.setGender(Gender.MALE);
+
+        Steward awaibleS1 = new Steward();
+        awaibleS1.setFirstname("fn2");
+        awaibleS1.setSurname("sn3");
+        awaibleS1.setPersonalIdentificator("111-11113");
+        awaibleS1.setDateOfBirth(formatter.parse("1988/02/02"));
+        awaibleS1.setEmploymentDate(formatter.parse("2014/03/01"));
+        awaibleS1.setGender(Gender.FEMALE);
+
+        Steward awaibleS2 = new Steward();
+        awaibleS2.setFirstname("fn2");
+        awaibleS2.setSurname("sn3");
+        awaibleS2.setPersonalIdentificator("111-11114");
+        awaibleS2.setDateOfBirth(formatter.parse("1988/02/02"));
+        awaibleS2.setEmploymentDate(formatter.parse("2014/03/01"));
+        awaibleS2.setGender(Gender.FEMALE);
+
+        stewardDao.create(s1);
+        stewardDao.create(s2);
+        stewardDao.create(awaibleS1);
+        stewardDao.create(awaibleS2);
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(2015, 1, 6, 2, 0); //YY MM DD 0 january
+        Date date1 = cal.getTime();
+        cal.set(2015, 1, 18, 2, 0);
+        Date date2 = cal.getTime();
+        
+        cal.set(2015, 1, 5, 0, 0);
+        Date date3 = cal.getTime();
+        cal.set(2015, 1, 10, 0, 0);
+        Date date4 = cal.getTime();
+        
+        cal.set(2015, 1, 11, 0, 0);
+        Date date5 = cal.getTime();
+        cal.set(2015, 1, 13, 0, 0);
+        Date date6 = cal.getTime();
+        
+        cal.set(2015, 1, 14, 0, 0);
+        Date date7 = cal.getTime();
+        cal.set(2015, 1, 17, 0, 0);
+        Date date8 = cal.getTime();
+        
+        cal.set(2015, 1, 8, 0, 0);
+        Date from = cal.getTime();
+        cal.set(2015, 1, 15, 0, 0);
+        Date to = cal.getTime();
+        
+
+        Flight f1 = new Flight();
+        f1.setAirplane(airA);
+        f1.setArrival(date2);
+        f1.setDeparture(date1);
+        f1.setOrigin(d1);
+        f1.setDestination(d2);
+        f1.addSteward(s1);
+        f1.addSteward(s2);
+
+        Flight f2 = new Flight();
+        f2.setAirplane(airA);
+        f2.setArrival(date4);
+        f2.setDeparture(date3);
+        f2.setOrigin(d1);
+        f2.setDestination(d2);
+        f2.addSteward(s2);
+        
+        flightDao.create(f1);
+        flightDao.create(f2);
+
+        List<Flight> flights = stewardDao.findLastStewardFlights(s2);
+        assert flights.size() == 2;
+        
+        flights = stewardDao.findLastStewardFlights(s1);
+        assert flights.size() == 1;
     }
 }
