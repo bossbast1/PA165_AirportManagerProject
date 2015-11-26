@@ -34,7 +34,11 @@ public class StewardFacadeImpl implements StewardFacade {
 
     @Override
     public StewardDTO getStewardWithId(Long id) {
-        return beanMappingservice.mapTo(stewardService.findById(id), StewardDTO.class);
+        Steward steward = stewardService.findById(id);
+        if (steward == null) {
+            return null;
+        }
+        return beanMappingservice.mapTo(steward, StewardDTO.class);
     }
 
     @Override
@@ -65,8 +69,10 @@ public class StewardFacadeImpl implements StewardFacade {
 
     @Override
     public void updateStewardName(UpdateStewardNameDTO update) {
-        Steward updateSteward = beanMappingservice.mapTo(update, Steward.class);
-        stewardService.updateSteward(updateSteward);
+        Steward oldSteward = stewardService.findById(update.getId());
+        oldSteward.setFirstname(update.getFirstname());
+        oldSteward.setSurname(update.getSurname());
+        stewardService.updateSteward(oldSteward);
     }
 
     @Override
