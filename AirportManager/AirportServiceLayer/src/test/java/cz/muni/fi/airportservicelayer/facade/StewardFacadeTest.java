@@ -45,10 +45,10 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
     @Autowired
     private StewardFacade stewardFacade;
     
-    @Autowired
+    //@Autowired
     private FlightFacade flightFacade;
     
-    @Autowired
+    //@Autowired
     private DestinationFacade destinationFacade;
     
     private StewardCreationalDTO s1;
