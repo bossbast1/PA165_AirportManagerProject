@@ -13,6 +13,7 @@ import cz.muni.fi.airportapi.dto.StewardCreationalDTO;
 import cz.muni.fi.airportapi.dto.StewardDTO;
 import cz.muni.fi.airportapi.dto.UpdateStewardNameDTO;
 import cz.muni.fi.airportapi.facade.StewardFacade;
+import cz.muni.fi.airportservicelayer.config.ServiceTestConfiguration;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ import static org.junit.Assert.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -34,10 +37,8 @@ import org.testng.annotations.Test;
  *
  * @author Sebastian Kupka
  */
-@ContextConfiguration(classes = {JpaTestContext.class})
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
-public class StewardFacadeTest {
+@ContextConfiguration(classes = {ServiceTestConfiguration.class})
+public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
     
     @Autowired
     private StewardFacade stewardFacade;
@@ -135,7 +136,8 @@ public class StewardFacadeTest {
         Long id = stewardFacade.createSteward(s1);
         Assert.notNull(stewardFacade.getStewardWithId(id));
         stewardFacade.removeSteward(id);
-        Assert.isNull(stewardFacade.getStewardWithId(id));
+        StewardDTO tmp = stewardFacade.getStewardWithId(id);
+        Assert.isNull(tmp);
         
     }
 
