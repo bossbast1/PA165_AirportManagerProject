@@ -10,11 +10,14 @@ import cz.muni.fi.airport.dao.StewardDao;
 import cz.muni.fi.airport.entity.Destination;
 import cz.muni.fi.airport.entity.Flight;
 import cz.muni.fi.airport.entity.Steward;
+import cz.muni.fi.airportservicelayer.exceptions.IllegalArgumentDataException;
 import cz.muni.fi.airportservicelayer.exceptions.BasicDataAccessException;
+import cz.muni.fi.airportservicelayer.exceptions.ValidationDataException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
+import javax.validation.ValidationException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -27,59 +30,156 @@ public class StewardServiceImpl implements StewardService {
     
     @Inject
     private StewardDao stewardDao;
-    
-    @Inject
-    private DestinationDao destinationDao;
 
     @Override
     public Steward findById(Long id) {
-        return stewardDao.findById(id);
+        if (id == null) {
+            return null;
+        }
+        try {
+            return stewardDao.findById(id);
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            throw new IllegalArgumentDataException(ex);
+        } catch (ValidationException ex) {
+            throw new ValidationDataException(ex);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException(ex);
+        }
     }
 
     @Override
     public Steward findByPersonalIdentificator(String personalIdentificator) {
-        return stewardDao.findByIdentificator(personalIdentificator);
+        if (personalIdentificator == null) {
+            return null;
+        }
+        try {
+            return stewardDao.findByIdentificator(personalIdentificator);
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            throw new IllegalArgumentDataException(ex);
+        } catch (ValidationException ex) {
+            throw new ValidationDataException(ex);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException(ex);
+        }
     }
 
     @Override
-    public List<Steward> getAllStewards() {
-        return stewardDao.findAll();
+    public List<Steward> findAllStewards() {
+        try {
+            return stewardDao.findAll();
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            throw new IllegalArgumentDataException(ex);
+        } catch (ValidationException ex) {
+            throw new ValidationDataException(ex);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException(ex);
+        }
     }
 
     @Override
     public List<Steward> findByName(String name, String surname) {
-        return stewardDao.findByName(name, surname);
+        if (name == null) {
+            throw new IllegalArgumentException("name");
+        }
+        if (surname == null) {
+            throw new IllegalArgumentException("surname");
+        }
+        try {
+            return stewardDao.findByName(name, surname);
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            throw new IllegalArgumentDataException(ex);
+        } catch (ValidationException ex) {
+            throw new ValidationDataException(ex);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException(ex);
+        }
     }
 
     @Override
     public Long createSteward(Steward steward) {
-        stewardDao.create(steward);
+        if (steward == null) {
+            return null;
+        }
+        try {
+            stewardDao.create(steward);
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            throw new IllegalArgumentDataException(ex);
+        } catch (ValidationException ex) {
+            throw new ValidationDataException(ex);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException(ex);
+        }
         return steward.getId();
     }
 
     @Override
     public void removeSteward(Long id) {
-        stewardDao.remove(id);
+        if (id == null) {
+            return;
+        }
+        try {
+            stewardDao.remove(id);
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            throw new IllegalArgumentDataException(ex);
+        } catch (ValidationException ex) {
+            throw new ValidationDataException(ex);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException(ex);
+        }
     }
 
     @Override
     public void updateSteward(Steward update) {
-        stewardDao.update(update);
-    }
-
-    @Override
-    public List<Flight> getStewardFlights(Long id) {
-        return this.findStewardFlights(stewardDao.findById(id));
-    } 
-    
-    @Override
-    public List<Steward> findAvailableStewards(Date fromDate, Date toDate) {
-        return stewardDao.findAvailableStewards(fromDate, toDate);
+        if (update == null ||update.getId() == null) {
+            return;
+        }
+        try {
+            stewardDao.update(update);
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            throw new IllegalArgumentDataException(ex);
+        } catch (ValidationException ex) {
+            throw new ValidationDataException(ex);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException(ex);
+        }
     }
     
     @Override
     public List<Flight> findStewardFlights(Steward steward) {
-        return stewardDao.findLastStewardFlights(steward);
+        if (steward == null || steward.getId() == null) {
+            return new ArrayList<Flight>();
+        }
+        try {
+            return stewardDao.findLastStewardFlights(steward);
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            throw new IllegalArgumentDataException(ex);
+        } catch (ValidationException ex) {
+            throw new ValidationDataException(ex);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException(ex);
+        }
+    }
+    
+    @Override
+    public List<Steward> findAvailableStewards(Date fromDate, Date toDate) {
+        if (fromDate == null) {
+            throw new IllegalArgumentException("fromDate");
+        }
+        if (toDate == null) {
+            throw new IllegalArgumentException("toDate");
+        }
+        if (fromDate.compareTo(toDate) > 0) {
+            throw new IllegalArgumentException("fromDate is later than toDate");
+        }
+        try {
+            return stewardDao.findAvailableStewards(fromDate, toDate);
+        } catch (IllegalArgumentException | NullPointerException ex) {
+            throw new IllegalArgumentDataException(ex);
+        } catch (ValidationException ex) {
+            throw new ValidationDataException(ex);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException(ex);
+        }
     }
 
     //Advanced service
@@ -96,7 +196,7 @@ public class StewardServiceImpl implements StewardService {
             }
             availableStewards = this.findAvailableStewards(fromDate, toDate);
         } else {
-            availableStewards = this.getAllStewards();
+            availableStewards = this.findAllStewards();
         }
         if (locationId != null) {
             return findSpecificStewards(availableStewards, locationId);
@@ -113,10 +213,21 @@ public class StewardServiceImpl implements StewardService {
     private List<Steward> findSpecificStewards(List<Steward> availableStewards, long locationId) {
         List<Steward> specificAirplanes = new ArrayList<>();
         for(Steward steward : availableStewards) {
-            if (new Long(locationId).equals(stewardDao.findLastStewardFlights(steward).get(0).getDestination().getId())) {
+            Destination dest = this.findStewardLocation(steward);
+            if (dest != null && new Long(locationId).equals(dest.getId())) {
                 specificAirplanes.add(steward);
             }
         }
         return specificAirplanes;
+    }
+
+    @Override
+    public Destination findStewardLocation(Steward steward) {
+        List<Flight> flights = this.findStewardFlights(steward);
+        if (flights == null || flights.isEmpty()) {
+            return null;
+        } else {
+            return flights.get(0).getDestination();
+        }
     }
 }

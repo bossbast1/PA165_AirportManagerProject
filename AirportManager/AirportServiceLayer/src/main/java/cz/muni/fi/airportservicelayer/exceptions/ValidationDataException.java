@@ -11,13 +11,9 @@ import org.springframework.dao.DataAccessException;
  *
  * @author Sebastian Kupka
  */
-public class ArgumentException extends DataAccessException {
+public class ValidationDataException extends DataAccessException {
 
-    public ArgumentException(Throwable cause) {
-        super("Some argument was invalid.", cause);
-    }
-    
-    public ArgumentException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+    public ValidationDataException(Throwable cause) {
+        super("Validation failed on Persistant Layer", cause);
+    }  
 }

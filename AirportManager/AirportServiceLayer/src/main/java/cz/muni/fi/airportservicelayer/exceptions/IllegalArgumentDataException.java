@@ -11,9 +11,13 @@ import org.springframework.dao.DataAccessException;
  *
  * @author Sebastian Kupka
  */
-public class ConstrainViolationException extends DataAccessException {
+public class IllegalArgumentDataException extends DataAccessException {
 
-    public ConstrainViolationException(Throwable cause) {
-        super("Connstrain violated on Persistant Layer", cause);
-    }  
+    public IllegalArgumentDataException(Throwable cause) {
+        super("Some argument was invalid.", cause);
+    }
+    
+    public IllegalArgumentDataException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
 }
