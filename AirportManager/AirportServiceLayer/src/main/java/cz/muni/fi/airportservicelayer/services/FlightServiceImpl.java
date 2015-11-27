@@ -8,7 +8,7 @@ package cz.muni.fi.airportservicelayer.services;
 import cz.muni.fi.airport.dao.FlightDao;
 import cz.muni.fi.airport.entity.Destination;
 import cz.muni.fi.airport.entity.Flight;
-import cz.muni.fi.airportservicelayer.exceptions.ArgumentException;
+import cz.muni.fi.airportservicelayer.exceptions.IllegalArgumentDataException;
 import cz.muni.fi.airportservicelayer.exceptions.BasicDataAccessException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +57,7 @@ public class FlightServiceImpl implements FlightService {
         try {
             return flightDao.findById(id);
         } catch (Exception e) {
-            throw new ArgumentException("Exception on findById in FlightDao", e);
+            throw new IllegalArgumentDataException("Exception on findById in FlightDao", e);
         }
     }
 
@@ -66,7 +66,7 @@ public class FlightServiceImpl implements FlightService {
         try {
             return flightDao.findAll();
         } catch (Exception e) {
-            throw new ArgumentException("Exception on findAll in FlightDao", e);
+            throw new IllegalArgumentDataException("Exception on findAll in FlightDao", e);
         }
     }
 
@@ -75,7 +75,7 @@ public class FlightServiceImpl implements FlightService {
         try {
             return flightDao.listByDate(arrival);
         }catch (Exception e) {
-            throw new ArgumentException("Exception on listByDate in FlightDao", e);
+            throw new IllegalArgumentDataException("Exception on listByDate in FlightDao", e);
         }
     }
 
@@ -84,7 +84,7 @@ public class FlightServiceImpl implements FlightService {
         try {
             return flightDao.listByOrigin(origin);
         }catch (Exception e) {
-            throw new ArgumentException("Exception on listByOrigin in FlightDao", e);
+            throw new IllegalArgumentDataException("Exception on listByOrigin in FlightDao", e);
         }
     }
 
@@ -93,7 +93,7 @@ public class FlightServiceImpl implements FlightService {
         try {
             return flightDao.listByDestination(destination);
         }catch (Exception e) {
-            throw new ArgumentException("Exception on listByDestination in FlightDao", e);
+            throw new IllegalArgumentDataException("Exception on listByDestination in FlightDao", e);
         }
     }
     

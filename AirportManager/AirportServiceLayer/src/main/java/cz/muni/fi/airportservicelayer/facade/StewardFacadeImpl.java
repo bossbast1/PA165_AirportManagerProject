@@ -49,7 +49,7 @@ public class StewardFacadeImpl implements StewardFacade {
 
     @Override
     public List<StewardDTO> getAllStewards() {
-        return beanMappingservice.mapTo(stewardService.getAllStewards(), StewardDTO.class);
+        return beanMappingservice.mapTo(stewardService.findAllStewards(), StewardDTO.class);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class StewardFacadeImpl implements StewardFacade {
 
     @Override
     public List<FlightDTO> getStewardFlights(Long id) {
-        return beanMappingservice.mapTo(stewardService.getStewardFlights(id), FlightDTO.class);
+        return beanMappingservice.mapTo(stewardService.findStewardFlights(stewardService.findById(id)), FlightDTO.class);
     }
     
     @Override
