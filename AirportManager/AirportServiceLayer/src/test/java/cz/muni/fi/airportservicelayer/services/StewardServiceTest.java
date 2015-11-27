@@ -311,9 +311,9 @@ public class StewardServiceTest extends AbstractTransactionalTestNGSpringContext
         Destination dest1 = new Destination(1l);
         dest1.setLocation("Brno");
         Destination dest2 = new Destination(2l);
-        dest1.setLocation("Brno");
+        dest2.setLocation("Brno");
         Destination dest3 = new Destination(3l);
-        dest1.setLocation("Bratislava");
+        dest3.setLocation("Bratislava");
         
         Flight flight1 = new Flight();
         flight1.setAirplane(airplane1);

@@ -5,8 +5,6 @@
  */
 package cz.muni.fi.airportapi.dto;
 
-import cz.muni.fi.airport.entity.Destination;
-import cz.muni.fi.airport.entity.Flight;
 import java.util.Objects;
 
 /**
@@ -16,7 +14,7 @@ import java.util.Objects;
 public class UpdateFlightDestinationDTO {
     
     private Long id;
-    private Destination destination;
+    private DestinationDTO destination;
     
     @Override
     public int hashCode() {
@@ -51,14 +49,14 @@ public class UpdateFlightDestinationDTO {
     /**
      * @return the destination
      */
-    public Destination getDestination() {
+    public DestinationDTO getDestination() {
         return destination;
     }
 
     /**
      * @param destination the destination to set
      */
-    public void setDestination(Destination destination) {
+    public void setDestination(DestinationDTO destination) {
         this.destination = destination;
     }
 
