@@ -30,10 +30,10 @@ public class UpdateFlightOriginDTO {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Flight)) {
+        if (!(obj instanceof UpdateFlightOriginDTO)) {
             return false;
         }
-        final Flight other = (Flight) obj;
+        final UpdateFlightOriginDTO other = (UpdateFlightOriginDTO) obj;
         if (!Objects.equals(this.getOrigin(), other.getOrigin())) {
             return false;
         }

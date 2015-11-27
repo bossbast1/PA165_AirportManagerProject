@@ -116,10 +116,10 @@ public class FlightDTO {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Flight)) {
+        if (!(obj instanceof FlightDTO)) {
             return false;
         }
-        final Flight other = (Flight) obj;
+        final FlightDTO other = (FlightDTO) obj;
         if (!Objects.equals(this.getArrival(), other.getArrival())) {
             return false;
         }
