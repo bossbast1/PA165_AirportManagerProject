@@ -63,11 +63,11 @@ public class FlightDaoImpl implements FlightDao {
 
     @Override
     public List<Flight> listByOrigin(Long id) {
-        return em.createQuery("SELECT f FROM Flight f WHERE f.id = :id", Flight.class).setParameter("id", id).getResultList();
+        return em.createQuery("SELECT f FROM Flight f WHERE f.origin.id = :id", Flight.class).setParameter("id", id).getResultList();
     }
 
     @Override
     public List<Flight> listByDestination(Long id) {
-        return em.createQuery("SELECT f FROM Flight f WHERE f.id = :id", Flight.class).setParameter("id", id).getResultList();
+        return em.createQuery("SELECT f FROM Flight f WHERE f.destination.id = :id", Flight.class).setParameter("id", id).getResultList();
     }
 }

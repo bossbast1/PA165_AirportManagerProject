@@ -172,13 +172,13 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
         Long stewardId1 = stewardFacade.createSteward(s1);   
         StewardDTO steward1 = stewardFacade.getStewardWithId(stewardId1);
         
-        Long stewardId2 = stewardFacade.createSteward(s1);   
-        StewardDTO steward2 = stewardFacade.getStewardWithId(stewardId1);  
+        Long stewardId2 = stewardFacade.createSteward(s2);   
+        StewardDTO steward2 = stewardFacade.getStewardWithId(stewardId2);  
         
         DestinationCreationalDTO destCreate1 = new DestinationCreationalDTO();
         destCreate1.setLocation("Brno");
         DestinationCreationalDTO destCreate2 = new DestinationCreationalDTO();
-        destCreate2.setLocation("Brno");
+        destCreate2.setLocation("Praha");
         DestinationCreationalDTO destCreate3 = new DestinationCreationalDTO();
         destCreate3.setLocation("Bratislava");
         
@@ -201,12 +201,12 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
         
         cal.set(2015, 1, 10, 0, 0);
         Date departure2 = cal.getTime();
-        cal.set(2015, 1, 10, 1, 0);
+        cal.set(2015, 1, 11, 1, 0);
         Date arrival2 = cal.getTime();
         
-        cal.set(2015, 1, 11, 1, 0);
+        cal.set(2015, 1, 12, 1, 0);
         Date departure3 = cal.getTime();
-        cal.set(2015, 1, 11, 1, 1);
+        cal.set(2015, 1, 13, 1, 1);
         Date arrival3 = cal.getTime();
         
         FlightCreationalDTO flightCreate1 = new FlightCreationalDTO();
@@ -230,8 +230,8 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
         flightCreate3.setAirplane(airplane1);
         flightCreate3.setDeparture(departure3);
         flightCreate3.setArrival(arrival3);
-        flightCreate2.setOrigin(dest3);
-        flightCreate2.setDestination(dest2);
+        flightCreate3.setOrigin(dest3);
+        flightCreate3.setDestination(dest2);
         flightCreate3.addSteward(steward1);
         
         FlightDTO flight1 = flightFacade.getFlightWithId(flightFacade.createFlight(flightCreate1));
@@ -258,13 +258,13 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
         Long stewardId1 = stewardFacade.createSteward(s1);   
         StewardDTO steward1 = stewardFacade.getStewardWithId(stewardId1);
         
-        Long stewardId2 = stewardFacade.createSteward(s1);   
-        StewardDTO steward2 = stewardFacade.getStewardWithId(stewardId1);  
+        Long stewardId2 = stewardFacade.createSteward(s2);   
+        StewardDTO steward2 = stewardFacade.getStewardWithId(stewardId2);  
         
         DestinationCreationalDTO destCreate1 = new DestinationCreationalDTO();
         destCreate1.setLocation("Brno");
         DestinationCreationalDTO destCreate2 = new DestinationCreationalDTO();
-        destCreate2.setLocation("Brno");
+        destCreate2.setLocation("Praha");
         DestinationCreationalDTO destCreate3 = new DestinationCreationalDTO();
         destCreate3.setLocation("Bratislava");
         
@@ -287,12 +287,12 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
         
         cal.set(2015, 1, 10, 0, 0);
         Date departure2 = cal.getTime();
-        cal.set(2015, 1, 10, 1, 0);
+        cal.set(2015, 1, 11, 1, 0);
         Date arrival2 = cal.getTime();
         
-        cal.set(2015, 1, 11, 1, 0);
+        cal.set(2015, 1, 12, 1, 0);
         Date departure3 = cal.getTime();
-        cal.set(2015, 1, 11, 1, 1);
+        cal.set(2015, 1, 13, 1, 1);
         Date arrival3 = cal.getTime();
         
         FlightCreationalDTO flightCreate1 = new FlightCreationalDTO();
@@ -316,8 +316,8 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
         flightCreate3.setAirplane(airplane1);
         flightCreate3.setDeparture(departure3);
         flightCreate3.setArrival(arrival3);
-        flightCreate2.setOrigin(dest3);
-        flightCreate2.setDestination(dest2);
+        flightCreate3.setOrigin(dest3);
+        flightCreate3.setDestination(dest2);
         flightCreate3.addSteward(steward1);
         
         FlightDTO flight1 = flightFacade.getFlightWithId(flightFacade.createFlight(flightCreate1));
@@ -346,13 +346,13 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
         Long stewardId1 = stewardFacade.createSteward(s1);   
         StewardDTO steward1 = stewardFacade.getStewardWithId(stewardId1);
         
-        Long stewardId2 = stewardFacade.createSteward(s1);   
-        StewardDTO steward2 = stewardFacade.getStewardWithId(stewardId1);  
+        Long stewardId2 = stewardFacade.createSteward(s2);   
+        StewardDTO steward2 = stewardFacade.getStewardWithId(stewardId2);  
         
         DestinationCreationalDTO destCreate1 = new DestinationCreationalDTO();
         destCreate1.setLocation("Brno");
         DestinationCreationalDTO destCreate2 = new DestinationCreationalDTO();
-        destCreate2.setLocation("Brno");
+        destCreate2.setLocation("Praha");
         DestinationCreationalDTO destCreate3 = new DestinationCreationalDTO();
         destCreate3.setLocation("Bratislava");
         
@@ -375,15 +375,15 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
         
         cal.set(2015, 1, 10, 0, 0);
         Date departure2 = cal.getTime();
-        cal.set(2015, 1, 10, 1, 0);
+        cal.set(2015, 1, 11, 1, 0);
         Date arrival2 = cal.getTime();
         
-        cal.set(2015, 1, 11, 1, 0);
+        cal.set(2015, 1, 12, 1, 0);
         Date departure3 = cal.getTime();
-        cal.set(2015, 1, 11, 1, 2);
+        cal.set(2015, 1, 14, 1, 2);
         Date arrival3 = cal.getTime();
         
-        cal.set(2015, 1, 11, 1, 1);
+        cal.set(2015, 1, 13, 1, 1);
         Date between3 = cal.getTime();
         
         FlightCreationalDTO flightCreate1 = new FlightCreationalDTO();
@@ -407,8 +407,8 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
         flightCreate3.setAirplane(airplane1);
         flightCreate3.setDeparture(departure3);
         flightCreate3.setArrival(arrival3);
-        flightCreate2.setOrigin(dest3);
-        flightCreate2.setDestination(dest2);
+        flightCreate3.setOrigin(dest3);
+        flightCreate3.setDestination(dest2);
         flightCreate3.addSteward(steward1);
         
         FlightDTO flight1 = flightFacade.getFlightWithId(flightFacade.createFlight(flightCreate1));

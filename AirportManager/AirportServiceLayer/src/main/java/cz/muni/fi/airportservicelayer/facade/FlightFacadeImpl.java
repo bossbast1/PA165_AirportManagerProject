@@ -94,7 +94,7 @@ public class FlightFacadeImpl implements FlightFacade {
     @Override
     public void updateFlightDestination(UpdateFlightDestinationDTO update) {
         Flight f = flightService.findById(update.getId());
-        Destination d = destinationService.findById(update.getId());
+        Destination d = destinationService.findById(update.getDestination().getId());
         f.setDestination(d);
         flightService.update(f);
     }
@@ -102,7 +102,7 @@ public class FlightFacadeImpl implements FlightFacade {
     @Override
     public void updateFlightOrigin(UpdateFlightOriginDTO update) {
         Flight f = flightService.findById(update.getId());
-        Destination d = destinationService.findById(update.getId());
+        Destination d = destinationService.findById(update.getOrigin().getId());
         f.setOrigin(d);
         flightService.update(f);
     }
@@ -110,7 +110,7 @@ public class FlightFacadeImpl implements FlightFacade {
     @Override
     public void updateFlightAirplane(UpdateFlightsAirplaneDTO update) {
         Flight f = flightService.findById(update.getId());
-        Airplane a = airplaneService.findById(update.getId());
+        Airplane a = airplaneService.findById(update.getAirplane().getId());
         f.setAirplane(a);
         flightService.update(f);
     }

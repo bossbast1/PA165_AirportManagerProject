@@ -111,21 +111,15 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         a2.setCapacity(2);
         a2.setName("airB");
         a2.setType("typeB");
-
-        //airplaneFacade.createAirplane(a1);
-        //airplaneFacade.createAirplane(a2);
         
         air1 = airplaneFacade.getAirplaneWithId(airplaneFacade.createAirplane(a1));
-        air1 = airplaneFacade.getAirplaneWithId(airplaneFacade.createAirplane(a2));
+        air2 = airplaneFacade.getAirplaneWithId(airplaneFacade.createAirplane(a2));
 
         d1 = new DestinationCreationalDTO();
         d1.setLocation("Brno");
 
         d2 = new DestinationCreationalDTO();
         d2.setLocation("Praha");
-
-        //destinationFacade.createDestination(d1);
-        //destinationFacade.createDestination(d2);
         
         dest1 = destinationFacade.getDestinationWithId(destinationFacade.createDestination(d1));
         dest2 = destinationFacade.getDestinationWithId(destinationFacade.createDestination(d2));
@@ -155,10 +149,6 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         s3.setDateOfBirth(formatter.parse("1988/02/02"));
         s3.setEmploymentDate(formatter.parse("2014/03/01"));
         s3.setGender(Gender.FEMALE);
-
-        //stewardFacade.createSteward(s1);
-        //stewardFacade.createSteward(s2);
-        //stewardFacade.createSteward(s3);
         
         stew1 = stewardFacade.getStewardWithId(stewardFacade.createSteward(s1));
         stew2 = stewardFacade.getStewardWithId(stewardFacade.createSteward(s2));
@@ -276,7 +266,9 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         update.setId(id);
         update.setAirplane(air2);
         flightFacade.updateFlightAirplane(update);
-        assert air2.equals(flightFacade.getFlightWithId(id).getAirplane());
+        FlightDTO f = flightFacade.getFlightWithId(id);
+        AirplaneDTO a = flightFacade.getFlightWithId(id).getAirplane();
+        assertEquals(air2, flightFacade.getFlightWithId(id).getAirplane());
     }
 //    public List<FlightDTO> getFlightsByOrigin(Destination origin);
     @Test
