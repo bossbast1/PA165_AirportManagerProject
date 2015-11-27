@@ -9,6 +9,7 @@ import cz.muni.fi.airport.entity.Destination;
 import cz.muni.fi.airport.enums.Gender;
 import cz.muni.fi.airportapi.dto.*;
 import cz.muni.fi.airportapi.facade.*;
+import cz.muni.fi.airportservicelayer.config.FacadeTestConfiguration;
 import cz.muni.fi.airportservicelayer.config.ServiceTestConfiguration;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,20 +35,11 @@ import org.testng.annotations.Test;
  *
  * @author Sebastian Kupka
  */ 
-@ContextConfiguration(classes = {ServiceTestConfiguration.class})
+@ContextConfiguration(classes = {FacadeTestConfiguration.class})
 public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
     
     @Autowired
     private StewardFacade stewardFacade;
-    
-    @Autowired
-    private FlightFacade flightFacade;
-    
-    @Autowired
-    private DestinationFacade destinationFacade;
-    
-    @Autowired
-    private AirplaneFacade airplaneFacade;
     
     private StewardCreationalDTO s1;
     private StewardCreationalDTO s2;

@@ -17,11 +17,11 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import(JpaTestContext.class)
-@ComponentScan(basePackageClasses={StewardServiceImpl.class, 
-                                   DestinationServiceImpl.class,
-                                   AirplaneServiceImpl.class,
-                                   FlightServiceImpl.class, })
-public class ServiceTestConfiguration {
+@ComponentScan(basePackageClasses={StewardServiceImpl.class, StewardFacadeImpl.class,
+                                   DestinationServiceImpl.class, DestinationFacadeImpl.class,
+                                   AirplaneServiceImpl.class, AirplaneFacadeImpl.class,
+                                   FlightServiceImpl.class, FlightFacadeImpl.class})
+public class FacadeTestConfiguration {
 	
 
 	@Bean

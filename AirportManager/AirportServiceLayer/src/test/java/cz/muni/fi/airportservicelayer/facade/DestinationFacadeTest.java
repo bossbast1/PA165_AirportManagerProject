@@ -9,6 +9,7 @@ import cz.muni.fi.airportapi.dto.DestinationCreationalDTO;
 import cz.muni.fi.airportapi.dto.DestinationDTO;
 import cz.muni.fi.airportapi.dto.UpdateDestinationLocationDTO;
 import cz.muni.fi.airportapi.facade.DestinationFacade;
+import cz.muni.fi.airportservicelayer.config.FacadeTestConfiguration;
 import cz.muni.fi.airportservicelayer.config.ServiceTestConfiguration;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import org.testng.annotations.Test;
  *
  * @author Michal Zbranek
  */
-@ContextConfiguration(classes = {ServiceTestConfiguration.class})
+@ContextConfiguration(classes = {FacadeTestConfiguration.class})
 public class DestinationFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
     
     @Autowired
