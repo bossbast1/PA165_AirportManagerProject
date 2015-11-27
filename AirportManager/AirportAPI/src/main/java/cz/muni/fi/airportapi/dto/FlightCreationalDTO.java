@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.airport.entity;
+package cz.muni.fi.airportapi.dto;
 
+import cz.muni.fi.airport.entity.Airplane;
+import cz.muni.fi.airport.entity.Destination;
+import cz.muni.fi.airport.entity.Flight;
+import cz.muni.fi.airport.entity.Steward;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,16 +24,10 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
- * Class representing the entity of Flight
- * 
+ *
  * @author Gabriela Podolnikova
  */
-@Entity
-public class Flight {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class FlightCreationalDTO {
    
     @NotNull
     @Temporal(TemporalType.DATE)
@@ -52,17 +49,9 @@ public class Flight {
     @ManyToOne
     private Airplane airplane;
     
-
     @ManyToMany
     private List<Steward> stewards = new ArrayList<Steward>(); 
     
-    public Flight() {       
-    }
-    
-    public Flight(Long id) {
-        this.id = id;
-    }
-
     /**
      * @return the arrival
      */
@@ -133,6 +122,16 @@ public class Flight {
         this.airplane = airplane;
     }
     
+    /**
+     * @return the stewards
+     */
+    public List<Steward> getStewards() {
+        return Collections.unmodifiableList(stewards);
+    }
+    
+    public void addSteward(Steward s) {
+        stewards.add(s);
+    }
         
     @Override
     public int hashCode() {
@@ -172,25 +171,4 @@ public class Flight {
         return true;
     }
 
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @return the stewards
-     */
-    public List<Steward> getStewards() {
-        return Collections.unmodifiableList(stewards);
-    }
-    
-    public void addSteward(Steward s) {
-        stewards.add(s);
-    }
-    
-    public void removeSteward(Steward s) {
-        stewards.remove(s);
-    }
 }

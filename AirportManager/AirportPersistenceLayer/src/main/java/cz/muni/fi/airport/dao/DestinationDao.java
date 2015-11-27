@@ -44,7 +44,7 @@ public interface DestinationDao {
      * @param location location of destination
      * @return Destination with given location
      */
-    public Destination findByLocation(String location);
+    public List<Destination> findByLocation(String location);
     
     /**
      * lists all persisted destinations entities

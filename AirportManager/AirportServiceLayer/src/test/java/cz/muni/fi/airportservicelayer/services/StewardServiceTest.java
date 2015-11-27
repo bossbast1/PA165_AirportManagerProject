@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.service.spi.ServiceException;
-import static org.junit.Assert.*;
+
 import org.mockito.InjectMocks;
 import org.mockito.*;
 import static org.mockito.Mockito.when;
@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.springframework.util.Assert;
+import static org.testng.Assert.assertEquals;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -33,7 +34,7 @@ import org.testng.annotations.Test;
 /**
  *
  * @author Sebastian Kupka
- */
+ */ 
 @ContextConfiguration(classes=ServiceTestConfiguration.class)
 public class StewardServiceTest extends AbstractTransactionalTestNGSpringContextTests  
 { 
@@ -171,4 +172,4 @@ public class StewardServiceTest extends AbstractTransactionalTestNGSpringContext
     @Test
     public void testFindAvailableStewardsAtLocation() {
     }
-}
+} 

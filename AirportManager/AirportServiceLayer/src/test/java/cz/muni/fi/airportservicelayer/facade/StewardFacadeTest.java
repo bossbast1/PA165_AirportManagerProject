@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static org.junit.Assert.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -32,23 +31,21 @@ import org.springframework.test.context.testng.AbstractTransactionalTestNGSpring
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import static org.testng.Assert.assertEquals;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
  *
  * @author Sebastian Kupka
- */
+ */ 
 @ContextConfiguration(classes = {ServiceTestConfiguration.class})
 public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
     
     @Autowired
     private StewardFacade stewardFacade;
     
-    //@Autowired
     private FlightFacade flightFacade;
-    
-    //@Autowired
     private DestinationFacade destinationFacade;
     
     private StewardCreationalDTO s1;
@@ -182,4 +179,4 @@ public class StewardFacadeTest extends AbstractTransactionalTestNGSpringContextT
     public void testFindSpecificStewards() {
         // TODO
     }
-}
+} 

@@ -328,6 +328,16 @@ public class AirplaneDaoTest extends AbstractTestNGSpringContextTests {
         assert availableAirplanes.get(0).equals(availableAirplane);
     }
     
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testFindAvailableAirplanesIllegalArguments() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(2015, 1, 8, 0, 0);
+        Date from = cal.getTime();
+        cal.set(2015, 1, 15, 0, 0);
+        Date to = cal.getTime();
+        airplaneDao.findAvailableAirplanes(to, from);
+    }
+    
     @Test
     public void testGetLastAirplaneFlights() throws ParseException {
         
@@ -405,7 +415,7 @@ public class AirplaneDaoTest extends AbstractTestNGSpringContextTests {
         flightDao.create(f2);
         flightDao.create(f3);
         
-        List<Flight> lastFlights = airplaneDao.findLastAirplaneFlights(airplane);
+        List<Flight> lastFlights = airplaneDao.findAirplaneFlights(airplane);
         Assert.notNull(lastFlights);
         assert lastFlights.size() == 3;
     }

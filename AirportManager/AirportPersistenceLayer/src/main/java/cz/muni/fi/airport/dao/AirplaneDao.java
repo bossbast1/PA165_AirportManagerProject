@@ -72,6 +72,6 @@ public interface AirplaneDao {
      * @param a airplane for which last flight is found
      * @return list of last flights of given airplane
      */
-    public List<Flight> findLastAirplaneFlights(Airplane a);
+    public List<Flight> findAirplaneFlights(Airplane a);
     
 }

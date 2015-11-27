@@ -15,7 +15,7 @@ import cz.muni.fi.airportservicelayer.services.AirplaneService;
 import cz.muni.fi.airportservicelayer.services.BeanMappingService;
 import java.util.Date;
 import java.util.List;
-import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,10 +28,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AirplaneFacadeImpl implements AirplaneFacade {
     
-    @Inject
+    @Autowired
     private AirplaneService airplaneService;
     
-    @Inject
+    @Autowired
     private BeanMappingService beanMappingservice;
 
     @Override
@@ -50,9 +50,10 @@ public class AirplaneFacadeImpl implements AirplaneFacade {
     }
 
     @Override
-    public void createAirplane(AirplaneCreationalDTO a) {
+    public Long createAirplane(AirplaneCreationalDTO a) {
         Airplane mappedAirplane = beanMappingservice.mapTo(a, Airplane.class);
         airplaneService.create(mappedAirplane);
+        return mappedAirplane.getId();
     }
 
     @Override
@@ -83,7 +84,5 @@ public class AirplaneFacadeImpl implements AirplaneFacade {
         return beanMappingservice.mapTo(airplaneService.findSpecificAirplanes(from, to, capacity, location)
                 , AirplaneDTO.class);
     }
-    
-    
-    
+       
 }
