@@ -32,6 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.Assert;
+import static org.testng.Assert.assertEquals;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -164,33 +165,33 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         flightDTO.addSteward(s2);
     }
     
-//    @Test
-//    public void testGetFlightWithId() {
-//        FlightDTO fDTO = flightFacade.getFlightWithId(flightFacade.createFlight(flightCreationalDTO1));
-//        Assert.assertEquals(fDTO, flightDTO);
-//    }
-//    
-////    public List<FlightDTO> getAllFlights();
-//    @Test
-//    public void testGetAllFlights(){
-//        flightFacade.createFlight(flightCreationalDTO1);
-//        List<FlightDTO> l1 = flightFacade.getAllFlights();
-//        List<FlightDTO> l2 = new ArrayList<>();
-//        l2.add(flightDTO);
-//        Assert.assertEquals(l1, l2);
-//    }
-//    
-////    public List<FlightDTO> getFlightsByDate(boolean arrival);
-//    @Test
-//    public void testGetFlightsByDate() {
-//        flightFacade.createFlight(flightCreationalDTO1);
-//        flightFacade.createFlight(flightCreationalDTO2);
-//        //flight should be ordered by arrival
-//        List<FlightDTO> l1 = flightFacade.getFlightsByDate(true);
-//        Assert.assertEquals(l1.get(0), flightDTO);
-//        assert flightDTO.equals(l1.get(0));
-//    }
-//    public Long createFlight(FlightCreationalDTO a);
+    @Test
+    public void testGetFlightWithId() {
+        FlightDTO f= flightFacade.getFlightWithId(flightFacade.createFlight(flightCreationalDTO1));
+        assert f.getArrival().equals(flightCreationalDTO1.getArrival());
+        assert f.getAirplane().equals(flightCreationalDTO1.getAirplane());
+    }
+    
+//    public List<FlightDTO> getAllFlights();
+    @Test
+    public void testGetAllFlights(){
+        flightFacade.createFlight(flightCreationalDTO1);
+        List<FlightDTO> l1 = flightFacade.getAllFlights();
+        assert l1.get(0).getArrival().equals(flightCreationalDTO1.getArrival());
+        assert l1.get(0).getAirplane().equals(flightCreationalDTO1.getAirplane());
+    }
+    
+//    public List<FlightDTO> getFlightsByDate(boolean arrival);
+    @Test
+    public void testGetFlightsByDate() {
+        flightFacade.createFlight(flightCreationalDTO1);
+        flightFacade.createFlight(flightCreationalDTO2);
+        //flight should be ordered by arrival
+        List<FlightDTO> l1 = flightFacade.getFlightsByDate(true);
+        assert l1.get(0).getArrival().equals(flightCreationalDTO1.getArrival());
+        assert l1.get(1).getArrival().equals(flightCreationalDTO2.getArrival());
+    }
+    
     @Test
     public void testCreateFlight() {
         Long id = flightFacade.createFlight(flightCreationalDTO1);
@@ -255,21 +256,17 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         assert a2.equals(flightFacade.getFlightWithId(id).getAirplane());
     }
 //    public List<FlightDTO> getFlightsByOrigin(Destination origin);
-//    @Test
-//    public void testGetFlightsByOrigin() {
-//        flightFacade.createFlight(flightCreationalDTO1);
-//        List<FlightDTO> l1 = flightFacade.getFlightsByOrigin(d1);
-//        List<FlightDTO> l2 = new ArrayList<>();
-//        l2.add(flightDTO);
-//        Assert.assertEquals(l1, l2);
-//    }
-////    public List<FlightDTO> getFlightsByDestination(Destination destination);
-//    @Test
-//    public void testGetFlightsByDestination() {
-//        flightFacade.createFlight(flightCreationalDTO1);
-//        List<FlightDTO> l1 = flightFacade.getFlightsByDestination(d2);
-//        List<FlightDTO> l2 = new ArrayList<>();
-//        l2.add(flightDTO);
-//        Assert.assertEquals(l1, l2);
-//    }
+    @Test
+    public void testGetFlightsByOrigin() {
+        flightFacade.createFlight(flightCreationalDTO1);
+        List<FlightDTO> l1 = flightFacade.getFlightsByOrigin(d1);
+        assert l1.get(0).getOrigin().equals(d1);
+    }
+//    public List<FlightDTO> getFlightsByDestination(Destination destination);
+    @Test
+    public void testGetFlightsByDestination() {
+        flightFacade.createFlight(flightCreationalDTO1);
+        List<FlightDTO> l1 = flightFacade.getFlightsByDestination(d2);
+        assert l1.get(0).getDestination().equals(d2);
+    }
 }
