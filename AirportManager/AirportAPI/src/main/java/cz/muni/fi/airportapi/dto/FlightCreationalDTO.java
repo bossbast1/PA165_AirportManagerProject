@@ -165,5 +165,4 @@ public class FlightCreationalDTO {
         }
         return true;
     }
-
 }

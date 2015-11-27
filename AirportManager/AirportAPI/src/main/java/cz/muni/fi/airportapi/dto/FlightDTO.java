@@ -149,6 +149,6 @@ public class FlightDTO {
     }
     
     public void addSteward(StewardDTO s) {
-        stewards.add(s);
+        getStewards().add(s);
     }
 }

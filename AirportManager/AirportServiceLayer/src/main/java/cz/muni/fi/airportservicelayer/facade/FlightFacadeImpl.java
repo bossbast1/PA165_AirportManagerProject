@@ -8,6 +8,7 @@ package cz.muni.fi.airportservicelayer.facade;
 import cz.muni.fi.airport.entity.Airplane;
 import cz.muni.fi.airport.entity.Destination;
 import cz.muni.fi.airport.entity.Flight;
+import cz.muni.fi.airportapi.dto.DestinationDTO;
 import cz.muni.fi.airportapi.dto.FlightCreationalDTO;
 import cz.muni.fi.airportapi.dto.FlightDTO;
 import cz.muni.fi.airportapi.dto.UpdateFlightsAirplaneDTO;
@@ -115,12 +116,12 @@ public class FlightFacadeImpl implements FlightFacade {
     }
 
     @Override
-    public List<FlightDTO> getFlightsByOrigin(Destination origin) {
-        return beanMappingservice.mapTo(flightService.listByOrigin(origin), FlightDTO.class);
+    public List<FlightDTO> getFlightsByOrigin(DestinationDTO origin) {
+        return beanMappingservice.mapTo(flightService.listByOrigin(origin.getId()), FlightDTO.class);
     }
 
     @Override
-    public List<FlightDTO> getFlightsByDestination(Destination destination) {
-        return beanMappingservice.mapTo(flightService.listByDestination(destination), FlightDTO.class);
+    public List<FlightDTO> getFlightsByDestination(DestinationDTO destination) {
+        return beanMappingservice.mapTo(flightService.listByDestination(destination.getId()), FlightDTO.class);
     }
 }
