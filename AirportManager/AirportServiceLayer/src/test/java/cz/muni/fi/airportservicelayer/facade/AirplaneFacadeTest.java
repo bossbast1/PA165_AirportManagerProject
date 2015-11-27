@@ -13,8 +13,13 @@ import cz.muni.fi.airport.entity.Destination;
 import cz.muni.fi.airport.entity.Flight;
 import cz.muni.fi.airportapi.dto.AirplaneCreationalDTO;
 import cz.muni.fi.airportapi.dto.AirplaneDTO;
+import cz.muni.fi.airportapi.dto.DestinationCreationalDTO;
+import cz.muni.fi.airportapi.dto.DestinationDTO;
+import cz.muni.fi.airportapi.dto.FlightCreationalDTO;
+import cz.muni.fi.airportapi.dto.FlightDTO;
 import cz.muni.fi.airportapi.dto.UpdateAirplaneCapacityDTO;
 import cz.muni.fi.airportapi.facade.AirplaneFacade;
+import cz.muni.fi.airportapi.facade.DestinationFacade;
 import cz.muni.fi.airportapi.facade.FlightFacade;
 import cz.muni.fi.airportapi.facade.StewardFacade;
 import cz.muni.fi.airportservicelayer.config.ServiceTestConfiguration;
@@ -39,8 +44,11 @@ public class AirplaneFacadeTest extends AbstractTransactionalTestNGSpringContext
     @Autowired
     private AirplaneFacade airplaneFacade;
     
-    //@Autowired
+    @Autowired
     private FlightFacade flightFacade;
+    
+    @Autowired
+    private DestinationFacade destinationFacade;
     
     private AirplaneCreationalDTO creationalAirplaneDTO1;
     private AirplaneCreationalDTO creationalAirplaneDTO2;
@@ -130,14 +138,162 @@ public class AirplaneFacadeTest extends AbstractTransactionalTestNGSpringContext
     }
 
     @Test
-    public void testGetAirplaneFlights(Long id) {       
-        //Not supported because flight facade is not implemented (27.11. - 01:00:00
-        //TODO
+    public void testGetAirplaneFlights() {     
+        
+        AirplaneDTO airplane1 = airplaneFacade.getAirplaneWithId(airplaneFacade.createAirplane(creationalAirplaneDTO1));
+        AirplaneDTO airplane2 = airplaneFacade.getAirplaneWithId(airplaneFacade.createAirplane(creationalAirplaneDTO2));
+        
+        DestinationCreationalDTO destCreate1 = new DestinationCreationalDTO();
+        destCreate1.setLocation("Brno");
+        DestinationCreationalDTO destCreate2 = new DestinationCreationalDTO();
+        destCreate2.setLocation("Praha");
+        DestinationCreationalDTO destCreate3 = new DestinationCreationalDTO();
+        destCreate3.setLocation("Bratislava");
+        
+        DestinationDTO dest1 = destinationFacade.getDestinationWithId(destinationFacade.createDestination(destCreate1));
+        DestinationDTO dest2 = destinationFacade.getDestinationWithId(destinationFacade.createDestination(destCreate2));
+        DestinationDTO dest3 = destinationFacade.getDestinationWithId(destinationFacade.createDestination(destCreate3));
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(2015, 1, 8, 0, 0);
+        Date departure1 = cal.getTime();
+        cal.set(2015, 1, 9, 0, 0);
+        Date arrival1 = cal.getTime();
+        
+        cal.set(2015, 1, 10, 0, 0);
+        Date departure2 = cal.getTime();
+        cal.set(2015, 1, 10, 1, 0);
+        Date arrival2 = cal.getTime();
+        
+        cal.set(2015, 1, 11, 1, 0);
+        Date departure3 = cal.getTime();
+        cal.set(2015, 1, 11, 1, 2);
+        Date arrival3 = cal.getTime();
+        
+        cal.set(2015, 1, 11, 1, 1);
+        Date between3 = cal.getTime();
+        
+        FlightCreationalDTO flightCreate1 = new FlightCreationalDTO();
+        flightCreate1.setAirplane(airplane1);
+        flightCreate1.setDeparture(departure1);
+        flightCreate1.setArrival(arrival1);
+        flightCreate1.setOrigin(dest1);
+        flightCreate1.setDestination(dest2);
+        
+        FlightCreationalDTO flightCreate2 = new FlightCreationalDTO();
+        flightCreate2.setAirplane(airplane2);
+        flightCreate2.setDeparture(departure2);
+        flightCreate2.setArrival(arrival2);
+        flightCreate2.setOrigin(dest2);
+        flightCreate2.setDestination(dest3);
+        
+        FlightCreationalDTO flightCreate3 = new FlightCreationalDTO();
+        flightCreate3.setAirplane(airplane1);
+        flightCreate3.setDeparture(departure3);
+        flightCreate3.setArrival(arrival3);
+        flightCreate3.setOrigin(dest3);
+        flightCreate3.setDestination(dest2);
+        
+        FlightDTO flight1 = flightFacade.getFlightWithId(flightFacade.createFlight(flightCreate1));
+        FlightDTO flight2 = flightFacade.getFlightWithId(flightFacade.createFlight(flightCreate2));
+        FlightDTO flight3 = flightFacade.getFlightWithId(flightFacade.createFlight(flightCreate3));
+        
+        // data prepared - starting test
+        
+        List<FlightDTO> flights = new ArrayList<FlightDTO>();
+        flights.add(flight3);
+        flights.add(flight1);
+        
+        Assert.assertEquals(airplaneFacade.getAirplaneFlights(airplane1.getId()), flights);
+        
+        flights = new ArrayList<FlightDTO>();
+        flights.add(flight2);
+        
+        Assert.assertEquals(airplaneFacade.getAirplaneFlights(airplane2.getId()), flights);
     }
 
     @Test
-    public void testGetSpecificAirplanes(Date from, Date to, int capacity, String location) {
-        //Not supported because flight facade is not implemented (27.11. - 01:00:00
-        //TODO
+    public void testGetSpecificAirplanes() {
+        AirplaneDTO airplane1 = airplaneFacade.getAirplaneWithId(airplaneFacade.createAirplane(creationalAirplaneDTO1));
+        AirplaneDTO airplane2 = airplaneFacade.getAirplaneWithId(airplaneFacade.createAirplane(creationalAirplaneDTO2));
+        
+        DestinationCreationalDTO destCreate1 = new DestinationCreationalDTO();
+        destCreate1.setLocation("Brno");
+        DestinationCreationalDTO destCreate2 = new DestinationCreationalDTO();
+        destCreate2.setLocation("Praha");
+        DestinationCreationalDTO destCreate3 = new DestinationCreationalDTO();
+        destCreate3.setLocation("Bratislava");
+        
+        DestinationDTO dest1 = destinationFacade.getDestinationWithId(destinationFacade.createDestination(destCreate1));
+        DestinationDTO dest2 = destinationFacade.getDestinationWithId(destinationFacade.createDestination(destCreate2));
+        DestinationDTO dest3 = destinationFacade.getDestinationWithId(destinationFacade.createDestination(destCreate3));
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(2015, 1, 8, 0, 0);
+        Date departure1 = cal.getTime();
+        cal.set(2015, 1, 9, 0, 0);
+        Date arrival1 = cal.getTime();
+        
+        cal.set(2015, 1, 10, 0, 0);
+        Date departure2 = cal.getTime();
+        cal.set(2015, 1, 11, 1, 0);
+        Date arrival2 = cal.getTime();
+        
+        cal.set(2015, 1, 12, 1, 0);
+        Date departure3 = cal.getTime();
+        cal.set(2015, 1, 13, 1, 0);
+        Date arrival3 = cal.getTime();
+        
+        cal.set(2015, 1, 14, 3, 0);
+        Date after = cal.getTime();
+        
+        
+        FlightCreationalDTO flightCreate1 = new FlightCreationalDTO();
+        flightCreate1.setAirplane(airplane1);
+        flightCreate1.setDeparture(departure1);
+        flightCreate1.setArrival(arrival1);
+        flightCreate1.setOrigin(dest1);
+        flightCreate1.setDestination(dest2);
+        
+        FlightCreationalDTO flightCreate2 = new FlightCreationalDTO();
+        flightCreate2.setAirplane(airplane1);
+        flightCreate2.setDeparture(departure2);
+        flightCreate2.setArrival(arrival2);
+        flightCreate2.setOrigin(dest2);
+        flightCreate2.setDestination(dest3);
+        
+        FlightCreationalDTO flightCreate3 = new FlightCreationalDTO();
+        flightCreate3.setAirplane(airplane2);
+        flightCreate3.setDeparture(departure3);
+        flightCreate3.setArrival(arrival3);
+        flightCreate3.setOrigin(dest3);
+        flightCreate3.setDestination(dest2);
+        
+        FlightDTO flight1 = flightFacade.getFlightWithId(flightFacade.createFlight(flightCreate1));
+        FlightDTO flight2 = flightFacade.getFlightWithId(flightFacade.createFlight(flightCreate2));
+        FlightDTO flight3 = flightFacade.getFlightWithId(flightFacade.createFlight(flightCreate3));
+        
+        // data prepared - starting test
+        
+        Assert.assertEquals(airplaneFacade.getAllAirplanes().size(), 2);
+        Assert.assertEquals(airplaneFacade.getSpecificAirplanes(after, after, 0, null).size(), 2);
+        Assert.assertEquals(airplaneFacade.getSpecificAirplanes(after, after, 50, null).size(), 2);
+        Assert.assertEquals(airplaneFacade.getSpecificAirplanes(after, after, 70, null).size(), 1);
+        Assert.assertEquals(airplaneFacade.getSpecificAirplanes(after, after, 110, null).size(), 0);
+        
+        Assert.assertEquals(airplaneFacade.getSpecificAirplanes(departure1, after, 0, null).size(), 0);
+        
+        List<AirplaneDTO> airplanes = new ArrayList<AirplaneDTO>();
+        airplanes.add(airplane2);
+        
+        Assert.assertEquals(airplaneFacade.getSpecificAirplanes(after, after, 0, dest2.getLocation()), airplanes);
+        Assert.assertEquals(airplaneFacade.getSpecificAirplanes(departure1, arrival2, 0, null), airplanes);
+        
+        airplanes = new ArrayList<AirplaneDTO>();
+        airplanes.add(airplane1);
+        
+        Assert.assertEquals(airplaneFacade.getSpecificAirplanes(after, after, 0, dest3.getLocation()), airplanes);
+        Assert.assertEquals(airplaneFacade.getSpecificAirplanes(arrival3, after, 0, null), airplanes);
+        
     }
 }
