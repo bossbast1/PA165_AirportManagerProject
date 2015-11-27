@@ -42,9 +42,9 @@ public class DestinationDTO {
 
     /**
      *
-     * @param name
+     * @param location
      */
-    public void setLocation(String name) {
+    public void setLocation(String location) {
         this.location = location;
     }
     
@@ -65,9 +65,6 @@ public class DestinationDTO {
             return false;
         }
         final DestinationDTO other = (DestinationDTO) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
         return Objects.equals(this.location, other.location);
     }
 

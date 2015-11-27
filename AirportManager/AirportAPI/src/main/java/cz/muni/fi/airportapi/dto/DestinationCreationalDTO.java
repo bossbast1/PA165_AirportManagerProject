@@ -53,7 +53,7 @@ public class DestinationCreationalDTO {
             return false;
         }
         final DestinationCreationalDTO other = (DestinationCreationalDTO) obj;
-        if (!Objects.equals(this.location, other.location)) {
+        if (!Objects.equals(this.getLocation(), other.getLocation())) {
             return false;
         }
         return true;

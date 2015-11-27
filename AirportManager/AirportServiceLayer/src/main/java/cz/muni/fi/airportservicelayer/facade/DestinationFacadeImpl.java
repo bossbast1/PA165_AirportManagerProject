@@ -33,11 +33,11 @@ public class DestinationFacadeImpl implements DestinationFacade{
 
     @Override
     public DestinationDTO getDestinationWithId(Long id) {
-        Destination dest = destinationService.findById(id);
-        if (dest == null) {
+        Destination destination = destinationService.findById(id);
+        if (destination == null) {
             return null;
         }
-        return beanMappingservice.mapTo(dest, DestinationDTO.class);
+        return beanMappingservice.mapTo(destination, DestinationDTO.class);
     }
 
     @Override

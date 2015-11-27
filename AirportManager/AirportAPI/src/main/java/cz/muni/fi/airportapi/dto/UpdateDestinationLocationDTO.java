@@ -61,7 +61,6 @@ public class UpdateDestinationLocationDTO {
     public int hashCode() {
         int hash = 3;
         hash = 59 * hash + Objects.hashCode(this.id);
-        hash = 59 * hash + Objects.hashCode(this.location);
         return hash;
     }
 
@@ -75,9 +74,6 @@ public class UpdateDestinationLocationDTO {
         }
         final UpdateDestinationLocationDTO other = (UpdateDestinationLocationDTO) obj;
         if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.location, other.location)) {
             return false;
         }
         return true;
