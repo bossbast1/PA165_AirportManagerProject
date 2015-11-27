@@ -193,4 +193,11 @@ public class Flight {
     public void removeSteward(Steward s) {
         stewards.remove(s);
     }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

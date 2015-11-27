@@ -103,11 +103,11 @@ public class FlightDTO {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.getArrival());
-        hash = 67 * hash + Objects.hashCode(this.getDeparture());
-        hash = 67 * hash + Objects.hashCode(this.getOrigin());
-        hash = 67 * hash + Objects.hashCode(this.getDestination());
-        hash = 67 * hash + Objects.hashCode(this.getAirplane());
+        hash = 47 * hash + Objects.hashCode(this.getArrival());
+        hash = 47 * hash + Objects.hashCode(this.getDeparture());
+        hash = 47 * hash + Objects.hashCode(this.getOrigin());
+        hash = 47 * hash + Objects.hashCode(this.getDestination());
+        hash = 47 * hash + Objects.hashCode(this.getAirplane());
         return hash;
     }
     
@@ -116,10 +116,10 @@ public class FlightDTO {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Flight)) {
+        if (!(obj instanceof FlightDTO)) {
             return false;
         }
-        final Flight other = (Flight) obj;
+        final FlightDTO other = (FlightDTO) obj;
         if (!Objects.equals(this.getArrival(), other.getArrival())) {
             return false;
         }

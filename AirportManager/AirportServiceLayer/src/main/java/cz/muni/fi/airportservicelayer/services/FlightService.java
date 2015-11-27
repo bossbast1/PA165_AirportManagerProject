@@ -8,11 +8,13 @@ package cz.muni.fi.airportservicelayer.services;
 import cz.muni.fi.airport.entity.Destination;
 import cz.muni.fi.airport.entity.Flight;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Gabriela Podolnikova
  */
+@Service
 public interface FlightService {
     
     /**
@@ -34,7 +36,7 @@ public interface FlightService {
      * 
      * @param f flight to be updated
      */
-    public Flight update(Flight f);
+    public void update(Flight f);
     
     /**
      * Finds the entity of flight by its ID

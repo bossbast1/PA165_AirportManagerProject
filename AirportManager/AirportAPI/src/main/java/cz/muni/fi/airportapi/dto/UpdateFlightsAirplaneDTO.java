@@ -31,10 +31,10 @@ public class UpdateFlightsAirplaneDTO {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Flight)) {
+        if (!(obj instanceof UpdateFlightsAirplaneDTO)) {
             return false;
         }
-        final Flight other = (Flight) obj;
+        final UpdateFlightsAirplaneDTO other = (UpdateFlightsAirplaneDTO) obj;
         if (!Objects.equals(this.getAirplane(), other.getAirplane())) {
             return false;
         }
@@ -60,5 +60,12 @@ public class UpdateFlightsAirplaneDTO {
      */
     public void setAirplane(Airplane airplane) {
         this.airplane = airplane;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 }

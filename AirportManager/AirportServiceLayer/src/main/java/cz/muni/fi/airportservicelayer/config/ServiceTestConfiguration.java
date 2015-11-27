@@ -19,7 +19,8 @@ import org.springframework.context.annotation.Import;
 @Import(JpaTestContext.class)
 @ComponentScan(basePackageClasses={StewardServiceImpl.class, StewardFacadeImpl.class,
                                    DestinationServiceImpl.class, DestinationFacadeImpl.class,
-                                   AirplaneServiceImpl.class, AirplaneFacadeImpl.class})
+                                   AirplaneServiceImpl.class, AirplaneFacadeImpl.class,
+                                   FlightServiceImpl.class, FlightFacadeImpl.class})
 public class ServiceTestConfiguration {
 	
 

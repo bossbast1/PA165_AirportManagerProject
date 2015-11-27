@@ -44,10 +44,10 @@ public class UpdateFlightArrivalDTO {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Flight)) {
+        if (!(obj instanceof UpdateFlightArrivalDTO)) {
             return false;
         }
-        final Flight other = (Flight) obj;
+        final UpdateFlightArrivalDTO other = (UpdateFlightArrivalDTO) obj;
         if (!Objects.equals(this.getArrival(), other.getArrival())) {
             return false;
         }
@@ -59,5 +59,9 @@ public class UpdateFlightArrivalDTO {
      */
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

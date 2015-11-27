@@ -38,7 +38,11 @@ public class FlightFacadeImpl implements FlightFacade {
     
     @Override
     public FlightDTO getFlightWithId(Long id) {
-        return beanMappingservice.mapTo(flightService.findById(id), FlightDTO.class);
+        Flight flight = flightService.findById(id);
+        if (flight == null) {
+            return null;
+        }
+        return beanMappingservice.mapTo(flight, FlightDTO.class);
     }
 
     @Override
@@ -52,8 +56,8 @@ public class FlightFacadeImpl implements FlightFacade {
     }
 
     @Override
-    public Long createFlight(FlightCreationalDTO a) {
-        Flight mappedF = beanMappingservice.mapTo(a, Flight.class);
+    public Long createFlight(FlightCreationalDTO f) {
+        Flight mappedF = beanMappingservice.mapTo(f, Flight.class);
         flightService.create(mappedF);
         return mappedF.getId();
     }
@@ -107,14 +111,4 @@ public class FlightFacadeImpl implements FlightFacade {
     public List<FlightDTO> getFlightsByDestination(Destination destination) {
         return beanMappingservice.mapTo(flightService.listByDestination(destination), FlightDTO.class);
     }
-
-//    @Override
-//    public AirplaneDTO getFlightAirplane(Flight f) {
-//      
-//    }
-//
-//    @Override
-//    public List<StewardDTO> getFlightStewards(Flight f) {
-//       
-//    }
 }
