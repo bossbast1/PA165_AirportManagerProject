@@ -4,11 +4,6 @@
  * and open the template in the editor.
  */
 package cz.muni.fi.airportapi.dto;
-
-import cz.muni.fi.airport.entity.Airplane;
-import cz.muni.fi.airport.entity.Destination;
-import cz.muni.fi.airport.entity.Flight;
-import cz.muni.fi.airport.entity.Steward;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -39,18 +34,18 @@ public class FlightCreationalDTO {
     
     @NotNull
     @ManyToOne
-    private Destination origin;
+    private DestinationDTO origin;
     
     @NotNull
     @ManyToOne
-    private Destination destination;
+    private DestinationDTO destination;
     
     @NotNull
     @ManyToOne
-    private Airplane airplane;
+    private AirplaneDTO airplane;
     
     @ManyToMany
-    private List<Steward> stewards = new ArrayList<Steward>(); 
+    private List<StewardDTO> stewards = new ArrayList<StewardDTO>(); 
     
     /**
      * @return the arrival
@@ -83,53 +78,53 @@ public class FlightCreationalDTO {
     /**
      * @return the origin
      */
-    public Destination getOrigin() {
+    public DestinationDTO getOrigin() {
         return origin;
     }
 
     /**
      * @param origin the origin to set
      */
-    public void setOrigin(Destination origin) {
+    public void setOrigin(DestinationDTO origin) {
         this.origin = origin;
     }
 
     /**
      * @return the destination
      */
-    public Destination getDestination() {
+    public DestinationDTO getDestination() {
         return destination;
     }
 
     /**
      * @param destination the destination to set
      */
-    public void setDestination(Destination destination) {
+    public void setDestination(DestinationDTO destination) {
         this.destination = destination;
     }
 
     /**
      * @return the airplane
      */
-    public Airplane getAirplane() {
+    public AirplaneDTO getAirplane() {
         return airplane;
     }
 
     /**
      * @param airplane the airplane to set
      */
-    public void setAirplane(Airplane airplane) {
+    public void setAirplane(AirplaneDTO airplane) {
         this.airplane = airplane;
     }
     
     /**
      * @return the stewards
      */
-    public List<Steward> getStewards() {
+    public List<StewardDTO> getStewards() {
         return Collections.unmodifiableList(stewards);
     }
     
-    public void addSteward(Steward s) {
+    public void addSteward(StewardDTO s) {
         stewards.add(s);
     }
         
