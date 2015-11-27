@@ -5,7 +5,10 @@
  */
 package cz.muni.fi.airport.dao;
 
+import cz.muni.fi.airport.entity.Airplane;
+import cz.muni.fi.airport.entity.Destination;
 import cz.muni.fi.airport.entity.Flight;
+import cz.muni.fi.airport.entity.Steward;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -57,5 +60,14 @@ public class FlightDaoImpl implements FlightDao {
             return em.createQuery("SELECT f FROM Flight f ORDER BY f.departure ASC", Flight.class).getResultList();
         }
     }
-    
+
+    @Override
+    public List<Flight> listByOrigin(Destination origin) {
+        return em.createQuery("SELECT f FROM Flight f WHERE f.origin = :origin", Flight.class).setParameter("origin", origin).getResultList();
+    }
+
+    @Override
+    public List<Flight> listByDestination(Destination destination) {
+        return em.createQuery("SELECT f FROM Flight f WHERE f.destination = :destination", Flight.class).setParameter("destination", destination).getResultList();
+    }
 }

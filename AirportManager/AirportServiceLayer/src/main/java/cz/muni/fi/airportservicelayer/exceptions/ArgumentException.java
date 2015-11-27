@@ -16,4 +16,8 @@ public class ArgumentException extends DataAccessException {
     public ArgumentException(Throwable cause) {
         super("Some argument was invalid.", cause);
     }
+    
+    public ArgumentException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
 }
