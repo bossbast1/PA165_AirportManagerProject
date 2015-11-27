@@ -103,11 +103,11 @@ public class FlightDTO {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.getArrival());
-        hash = 67 * hash + Objects.hashCode(this.getDeparture());
-        hash = 67 * hash + Objects.hashCode(this.getOrigin());
-        hash = 67 * hash + Objects.hashCode(this.getDestination());
-        hash = 67 * hash + Objects.hashCode(this.getAirplane());
+        hash = 47 * hash + Objects.hashCode(this.getArrival());
+        hash = 47 * hash + Objects.hashCode(this.getDeparture());
+        hash = 47 * hash + Objects.hashCode(this.getOrigin());
+        hash = 47 * hash + Objects.hashCode(this.getDestination());
+        hash = 47 * hash + Objects.hashCode(this.getAirplane());
         return hash;
     }
     

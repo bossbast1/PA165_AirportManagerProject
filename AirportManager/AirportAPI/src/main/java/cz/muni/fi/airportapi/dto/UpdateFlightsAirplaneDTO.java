@@ -61,4 +61,11 @@ public class UpdateFlightsAirplaneDTO {
     public void setAirplane(Airplane airplane) {
         this.airplane = airplane;
     }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

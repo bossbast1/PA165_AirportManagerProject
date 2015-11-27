@@ -20,7 +20,7 @@ public class UpdateFlightOriginDTO {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + Objects.hashCode(this.getId());
         hash = 67 * hash + Objects.hashCode(this.getOrigin());
         return hash;
     }
@@ -57,7 +57,14 @@ public class UpdateFlightOriginDTO {
     /**
      * @param origin the destination to set
      */
-    public void setDestination(Destination origin) {
+    public void setOrigin(Destination origin) {
         this.origin = origin;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 }

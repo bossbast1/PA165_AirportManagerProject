@@ -44,9 +44,9 @@ public class FlightServiceImpl implements FlightService {
     }
     
     @Override
-    public Flight update(Flight f) {
+    public void update(Flight f) {
         try {
-            return flightDao.update(f);
+            flightDao.update(f);
         } catch (Exception e) {
             throw new BasicDataAccessException("Exception on update in FlightDao", e);
         }

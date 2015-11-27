@@ -20,19 +20,93 @@ import java.util.List;
  * @author Gabriela Podolnikova
  */
 public interface FlightFacade {
-    public FlightDTO getFlightWithId(Long id);
-    public List<FlightDTO> getAllFlights();
-    public List<FlightDTO> getFlightsByDate(boolean arrival);
-    public Long createFlight(FlightCreationalDTO a);
-    public void removeFlight(Long id);
-    public void updateFlightArrival(UpdateFlightArrivalDTO update);
-    public void updateFlightDeparture(UpdateFlightDepartureDTO update);
-    public void updateFlightDestination(UpdateFlightDestinationDTO update);
-    public void updateFlightOrigin(UpdateFlightOriginDTO update);
-    public void updateFlightAirplane(UpdateFlightsAirplaneDTO update);
-    public List<FlightDTO> getFlightsByOrigin(Destination origin);
-    public List<FlightDTO> getFlightsByDestination(Destination destination);
-    //public AirplaneDTO getFlightAirplane(Flight f);
-    //public List<StewardDTO> getFlightStewards(Flight f);
     
+    /**
+     * Gets Flight DTO with given id.
+     * 
+     * @param id identificator of flight
+     * @return FlightDTO mapped
+     */
+    public FlightDTO getFlightWithId(Long id);
+    
+    /**
+     * Lists all flights.
+     * 
+     * @return lists of all flights
+     */
+    public List<FlightDTO> getAllFlights();
+    
+    /**
+     * Lists all flights by date.
+     * 
+     * @param arrival if true that the flight are sorted by arrival, if false then its sorted by departure
+     * @return list of flights
+     */
+    public List<FlightDTO> getFlightsByDate(boolean arrival);
+    
+    /**
+     * Creates flight with given CreationalDTO.
+     * 
+     * @param f to be mapped
+     * @return id of mapped instance of Flight
+     */
+    public Long createFlight(FlightCreationalDTO f);
+    
+    /**
+     * Removes Fligt.
+     * 
+     * @param id given id of FLight to be removed 
+     */
+    public void removeFlight(Long id);
+    
+    /**
+     * Updates Flight.
+     * 
+     * @param update Flight with updated arrival time 
+     */
+    public void updateFlightArrival(UpdateFlightArrivalDTO update);
+    
+    /**
+     * Updates Flight.
+     * 
+     * @param update Flight with updated departure time 
+     */
+    public void updateFlightDeparture(UpdateFlightDepartureDTO update);
+    
+    /**
+     * Updates Flight
+     * 
+     * @param update Flight with updated destination 
+     */
+    public void updateFlightDestination(UpdateFlightDestinationDTO update);
+    
+    /**
+     * Updates Flight
+     * 
+     * @param update Flight with updated origin destination 
+     */
+    public void updateFlightOrigin(UpdateFlightOriginDTO update);
+    
+    /**
+     * Updates Flight
+     * 
+     * @param update Flight with updated airplane
+     */
+    public void updateFlightAirplane(UpdateFlightsAirplaneDTO update);
+    
+    /**
+     * Lists Flights by origin location.
+     * 
+     * @param origin Destination to be sorted by.
+     * @return list of flights flying from given origin
+     */
+    public List<FlightDTO> getFlightsByOrigin(Destination origin);
+    
+    /**
+     * Lists Flights by destination.
+     * 
+     * @param destination Destination to be sorted by.
+     * @return list of flights flying to given destination
+     */
+    public List<FlightDTO> getFlightsByDestination(Destination destination);   
 }
