@@ -39,18 +39,18 @@ public class FlightCreationalDTO {
     
     @NotNull
     @ManyToOne
-    private Destination origin;
+    private DestinationCreationalDTO origin;
     
     @NotNull
     @ManyToOne
-    private Destination destination;
+    private DestinationCreationalDTO destination;
     
     @NotNull
     @ManyToOne
-    private Airplane airplane;
+    private AirplaneCreationalDTO airplane;
     
     @ManyToMany
-    private List<Steward> stewards = new ArrayList<Steward>(); 
+    private List<StewardCreationalDTO> stewards = new ArrayList<>(); 
     
     /**
      * @return the arrival
@@ -81,55 +81,13 @@ public class FlightCreationalDTO {
     }
 
     /**
-     * @return the origin
-     */
-    public Destination getOrigin() {
-        return origin;
-    }
-
-    /**
-     * @param origin the origin to set
-     */
-    public void setOrigin(Destination origin) {
-        this.origin = origin;
-    }
-
-    /**
-     * @return the destination
-     */
-    public Destination getDestination() {
-        return destination;
-    }
-
-    /**
-     * @param destination the destination to set
-     */
-    public void setDestination(Destination destination) {
-        this.destination = destination;
-    }
-
-    /**
-     * @return the airplane
-     */
-    public Airplane getAirplane() {
-        return airplane;
-    }
-
-    /**
-     * @param airplane the airplane to set
-     */
-    public void setAirplane(Airplane airplane) {
-        this.airplane = airplane;
-    }
-    
-    /**
      * @return the stewards
      */
-    public List<Steward> getStewards() {
+    public List<StewardCreationalDTO> getStewards() {
         return Collections.unmodifiableList(stewards);
     }
     
-    public void addSteward(Steward s) {
+    public void addSteward(StewardCreationalDTO s) {
         stewards.add(s);
     }
         
@@ -169,6 +127,48 @@ public class FlightCreationalDTO {
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the origin
+     */
+    public DestinationCreationalDTO getOrigin() {
+        return origin;
+    }
+
+    /**
+     * @param origin the origin to set
+     */
+    public void setOrigin(DestinationCreationalDTO origin) {
+        this.origin = origin;
+    }
+
+    /**
+     * @return the destination
+     */
+    public DestinationCreationalDTO getDestination() {
+        return destination;
+    }
+
+    /**
+     * @param destination the destination to set
+     */
+    public void setDestination(DestinationCreationalDTO destination) {
+        this.destination = destination;
+    }
+
+    /**
+     * @return the airplane
+     */
+    public AirplaneCreationalDTO getAirplane() {
+        return airplane;
+    }
+
+    /**
+     * @param airplane the airplane to set
+     */
+    public void setAirplane(AirplaneCreationalDTO airplane) {
+        this.airplane = airplane;
     }
 
 }

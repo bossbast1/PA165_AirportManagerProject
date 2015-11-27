@@ -24,10 +24,10 @@ public class FlightDTO {
     private Long id;
     private Date arrival;
     private Date departure;
-    private Destination origin;
-    private Destination destination;
-    private Airplane airplane;
-    private List<Steward> stewards = new ArrayList<Steward>(); 
+    private DestinationDTO origin;
+    private DestinationDTO destination;
+    private AirplaneDTO airplane;
+    private List<StewardDTO> stewards = new ArrayList<StewardDTO>(); 
     
     /**
      * @return the arrival
@@ -60,43 +60,22 @@ public class FlightDTO {
     /**
      * @return the origin
      */
-    public Destination getOrigin() {
+    public DestinationDTO getOrigin() {
         return origin;
-    }
-
-    /**
-     * @param origin the origin to set
-     */
-    public void setOrigin(Destination origin) {
-        this.origin = origin;
     }
 
     /**
      * @return the destination
      */
-    public Destination getDestination() {
+    public DestinationDTO getDestination() {
         return destination;
-    }
-
-    /**
-     * @param destination the destination to set
-     */
-    public void setDestination(Destination destination) {
-        this.destination = destination;
     }
 
     /**
      * @return the airplane
      */
-    public Airplane getAirplane() {
+    public AirplaneDTO getAirplane() {
         return airplane;
-    }
-
-    /**
-     * @param airplane the airplane to set
-     */
-    public void setAirplane(Airplane airplane) {
-        this.airplane = airplane;
     }
     
         
@@ -148,11 +127,32 @@ public class FlightDTO {
     /**
      * @return the stewards
      */
-    public List<Steward> getStewards() {
+    public List<StewardDTO> getStewards() {
         return Collections.unmodifiableList(stewards);
     }
     
-    public void addSteward(Steward s) {
-        stewards.add(s);
+    public void addSteward(StewardDTO s) {
+        getStewards().add(s);
+    }
+
+    /**
+     * @param origin the origin to set
+     */
+    public void setOrigin(DestinationDTO origin) {
+        this.origin = origin;
+    }
+
+    /**
+     * @param destination the destination to set
+     */
+    public void setDestination(DestinationDTO destination) {
+        this.destination = destination;
+    }
+
+    /**
+     * @param airplane the airplane to set
+     */
+    public void setAirplane(AirplaneDTO airplane) {
+        this.airplane = airplane;
     }
 }
