@@ -84,7 +84,10 @@ public class DestinationDaoTest extends AbstractTestNGSpringContextTests {
         destPraha.setLocation("Praha");
         
         destinationDao.create(destPraha);
-        assert destinationDao.findByLocation("Praha").equals(destPraha);
+        
+        List<Destination> destinations = destinationDao.findByLocation("Praha");
+        assert destinations.size() > 0;
+        assert destPraha.getLocation().equals(destinations.get(0).getLocation());
     }
     
     @Test

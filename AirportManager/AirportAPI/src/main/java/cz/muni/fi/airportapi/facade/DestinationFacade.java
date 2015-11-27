@@ -30,7 +30,7 @@ public interface DestinationFacade {
      * @param location location of destination
      * @return 
      */
-    public DestinationDTO getDestinationWithLocation(String location);
+    public List<DestinationDTO> getDestinationWithLocation(String location);
     
     /**
      * Lists all Destination DTOs

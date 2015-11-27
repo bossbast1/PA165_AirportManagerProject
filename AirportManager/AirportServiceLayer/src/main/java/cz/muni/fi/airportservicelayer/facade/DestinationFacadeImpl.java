@@ -41,7 +41,7 @@ public class DestinationFacadeImpl implements DestinationFacade{
     }
 
     @Override
-    public DestinationDTO getDestinationWithLocation(String location) {
+    public List<DestinationDTO> getDestinationWithLocation(String location) {
         return beanMappingservice.mapTo(destinationService.findByLocation(location), DestinationDTO.class);
     }
 
@@ -53,7 +53,8 @@ public class DestinationFacadeImpl implements DestinationFacade{
     @Override
     public Long createDestination(DestinationCreationalDTO destination) {
         Destination createDestination = beanMappingservice.mapTo(destination, Destination.class);
-        return destinationService.create(createDestination);
+        destinationService.create(createDestination);
+        return createDestination.getId();
     }
 
     @Override

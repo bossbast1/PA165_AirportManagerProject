@@ -19,6 +19,10 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 public class Destination {
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

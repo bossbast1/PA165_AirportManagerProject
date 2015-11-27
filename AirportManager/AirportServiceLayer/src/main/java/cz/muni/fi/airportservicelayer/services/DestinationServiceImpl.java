@@ -7,8 +7,8 @@ package cz.muni.fi.airportservicelayer.services;
 
 import cz.muni.fi.airport.dao.DestinationDao;
 import cz.muni.fi.airport.entity.Destination;
+import cz.muni.fi.airportservicelayer.exceptions.BasicDataAccessException;
 import java.util.List;
-//import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,33 +24,57 @@ public class DestinationServiceImpl implements DestinationService{
     
     @Override
     public Destination findById(Long id) {
-        return destinationDao.findById(id);
+        try{
+            return destinationDao.findById(id);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException("Exception on findById in DestinationDao", ex);
+        }
     }
 
     @Override
     public List<Destination> findAllDestinations() {
-        return destinationDao.findAll();
+        try {
+            return destinationDao.findAll();
+        } catch (Exception ex) {
+            throw new BasicDataAccessException("Exception on findAll"
+                    + " in Destination Dao", ex);
+        }
     }
 
     @Override
-    public Destination findByLocation(String location) {
-        return destinationDao.findByLocation(location);
+    public List<Destination> findByLocation(String location) {
+        try {
+            return destinationDao.findByLocation(location);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException("Exception on findByLocation in DestinationDao", ex);
+        }
     }
 
     @Override
-    public Long create(Destination destination) {
-        destinationDao.create(destination);
-        return destination.getId();
+    public void create(Destination destination) {
+        try { 
+            destinationDao.create(destination);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException("Exception on create in DestinationDao", ex);
+        }
     }
 
     @Override
     public void remove(Destination destination) {
-        destinationDao.remove(destination);
+        try {
+            destinationDao.remove(destination);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException("Exception on delete in DestinationDao", ex);
+        }
     }
 
     @Override
     public void update(Destination destination) {
-        destinationDao.update(destination);
+        try {    
+            destinationDao.update(destination);
+        } catch (Exception ex) {
+            throw new BasicDataAccessException("Exception on update in DestinationDao", ex);
+        }
     }
     
 }

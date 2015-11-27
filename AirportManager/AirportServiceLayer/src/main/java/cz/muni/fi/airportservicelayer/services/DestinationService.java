@@ -34,7 +34,7 @@ public interface DestinationService {
      * @param location
      * @return destination at given location
      */
-    Destination findByLocation(String location);
+    List<Destination> findByLocation(String location);
     
     /**
      * Creates specific Destination
@@ -42,7 +42,7 @@ public interface DestinationService {
      * @param destination to be created
      * @return 
      */
-    Long create(Destination destination);
+    void create(Destination destination);
     
     /**
      * Removes specific Destination
