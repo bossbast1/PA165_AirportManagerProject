@@ -23,6 +23,7 @@ import cz.muni.fi.airportapi.facade.AirplaneFacade;
 import cz.muni.fi.airportapi.facade.DestinationFacade;
 import cz.muni.fi.airportapi.facade.FlightFacade;
 import cz.muni.fi.airportapi.facade.StewardFacade;
+import cz.muni.fi.airportservicelayer.config.FacadeTestConfiguration;
 import cz.muni.fi.airportservicelayer.config.ServiceTestConfiguration;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,7 +43,7 @@ import org.testng.annotations.Test;
  *
  * @author Gabi
  */
-@ContextConfiguration(classes = {ServiceTestConfiguration.class})
+@ContextConfiguration(classes = {FacadeTestConfiguration.class})
 public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
 
     @Autowired
