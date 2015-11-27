@@ -110,7 +110,8 @@ public class AirplaneServiceImpl implements AirplaneService {
             List<Airplane> specificAirplanes = new ArrayList<>();
             for(Airplane airplane : availableAirplanes) {
                 if (airplane.getCapacity() >= capacity
-                        && location.equals(airplaneDao.findAirplaneFlights(airplane).get(0).getDestination().getLocation())) {
+                        && (location == null || 
+                        location.equals(airplaneDao.findAirplaneFlights(airplane).get(0).getDestination().getLocation()))) {
                     specificAirplanes.add(airplane);
                 }
             }

@@ -5,22 +5,24 @@
  */
 package cz.muni.fi.airportservicelayer.facade;
 
-import cz.muni.fi.airport.dao.AirplaneDao;
-import cz.muni.fi.airport.dao.DestinationDao;
-import cz.muni.fi.airport.dao.StewardDao;
-import cz.muni.fi.airport.entity.Airplane;
-import cz.muni.fi.airport.entity.Destination;
-import cz.muni.fi.airport.entity.Flight;
-import cz.muni.fi.airport.entity.Steward;
 import cz.muni.fi.airport.enums.Gender;
+import cz.muni.fi.airportapi.dto.AirplaneCreationalDTO;
+import cz.muni.fi.airportapi.dto.AirplaneDTO;
+import cz.muni.fi.airportapi.dto.DestinationCreationalDTO;
+import cz.muni.fi.airportapi.dto.DestinationDTO;
 import cz.muni.fi.airportapi.dto.FlightCreationalDTO;
 import cz.muni.fi.airportapi.dto.FlightDTO;
+import cz.muni.fi.airportapi.dto.StewardCreationalDTO;
+import cz.muni.fi.airportapi.dto.StewardDTO;
 import cz.muni.fi.airportapi.dto.UpdateFlightArrivalDTO;
 import cz.muni.fi.airportapi.dto.UpdateFlightDepartureDTO;
 import cz.muni.fi.airportapi.dto.UpdateFlightDestinationDTO;
 import cz.muni.fi.airportapi.dto.UpdateFlightOriginDTO;
 import cz.muni.fi.airportapi.dto.UpdateFlightsAirplaneDTO;
+import cz.muni.fi.airportapi.facade.AirplaneFacade;
+import cz.muni.fi.airportapi.facade.DestinationFacade;
 import cz.muni.fi.airportapi.facade.FlightFacade;
+import cz.muni.fi.airportapi.facade.StewardFacade;
 import cz.muni.fi.airportservicelayer.config.ServiceTestConfiguration;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,30 +49,41 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
     private FlightFacade flightFacade;
     
     @Autowired
-    public StewardDao stewardDao;
-
+    private AirplaneFacade airplaneFacade;
+    
     @Autowired
-    public DestinationDao destinationDao;
-
+    private DestinationFacade destinationFacade;
+    
     @Autowired
-    public AirplaneDao airplaneDao;
+    private StewardFacade stewardFacade;
+    
 
     private FlightCreationalDTO flightCreationalDTO1;
     private FlightCreationalDTO flightCreationalDTO2;
 
     private FlightDTO flightDTO;
 
-    private Steward s1;
-    private Steward s2;
-    private Steward s3;
-    private Destination d1;
-    private Destination d2;
-    private Airplane a1;
-    private Airplane a2;
+    private StewardCreationalDTO s1;
+    private StewardCreationalDTO s2;
+    private StewardCreationalDTO s3;
+    private DestinationCreationalDTO d1;
+    private DestinationCreationalDTO d2;
+    private AirplaneCreationalDTO a1;
+    private AirplaneCreationalDTO a2;
 
     private Date date1;
     private Date date2;
     private Date date3;
+    
+    private DestinationDTO dest1;
+    private DestinationDTO dest2;
+    
+    private StewardDTO stew1;
+    private StewardDTO stew2;
+    private StewardDTO stew3;
+    
+    private AirplaneDTO air1;
+    private AirplaneDTO air2;
 
     @BeforeMethod
     public void setup() throws ParseException {
@@ -89,31 +102,31 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         cal.set(2015, 1, 2, 0, 0);
         date3 = cal.getTime();
 
-        a1 = new Airplane();
+        a1 = new AirplaneCreationalDTO();
         a1.setCapacity(1);
         a1.setName("airA");
         a1.setType("typeA");
 
-        a2 = new Airplane();
+        a2 = new AirplaneCreationalDTO();
         a2.setCapacity(2);
         a2.setName("airB");
         a2.setType("typeB");
+        
+        air1 = airplaneFacade.getAirplaneWithId(airplaneFacade.createAirplane(a1));
+        air2 = airplaneFacade.getAirplaneWithId(airplaneFacade.createAirplane(a2));
 
-        airplaneDao.create(a1);
-        airplaneDao.create(a2);
-
-        d1 = new Destination();
+        d1 = new DestinationCreationalDTO();
         d1.setLocation("Brno");
 
-        d2 = new Destination();
+        d2 = new DestinationCreationalDTO();
         d2.setLocation("Praha");
-
-        destinationDao.create(d1);
-        destinationDao.create(d2);
+        
+        dest1 = destinationFacade.getDestinationWithId(destinationFacade.createDestination(d1));
+        dest2 = destinationFacade.getDestinationWithId(destinationFacade.createDestination(d2));
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
-        s1 = new Steward();
+        s1 = new StewardCreationalDTO();
         s1.setFirstname("fn1");
         s1.setSurname("sn1");
         s1.setPersonalIdentificator("111-11111");
@@ -121,7 +134,7 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         s1.setEmploymentDate(formatter.parse("2014/03/01"));
         s1.setGender(Gender.MALE);
 
-        s2 = new Steward();
+        s2 = new StewardCreationalDTO();
         s2.setFirstname("fn2");
         s2.setSurname("sn1");
         s2.setPersonalIdentificator("111-11112");
@@ -129,40 +142,40 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         s2.setEmploymentDate(formatter.parse("2014/03/01"));
         s2.setGender(Gender.MALE);
 
-        s3 = new Steward();
+        s3 = new StewardCreationalDTO();
         s3.setFirstname("fn2");
         s3.setSurname("sn3");
         s3.setPersonalIdentificator("111-11113");
         s3.setDateOfBirth(formatter.parse("1988/02/02"));
         s3.setEmploymentDate(formatter.parse("2014/03/01"));
         s3.setGender(Gender.FEMALE);
-
-        stewardDao.create(s1);
-        stewardDao.create(s2);
-        stewardDao.create(s3);
         
-        flightCreationalDTO1.setAirplane(a1);
+        stew1 = stewardFacade.getStewardWithId(stewardFacade.createSteward(s1));
+        stew2 = stewardFacade.getStewardWithId(stewardFacade.createSteward(s2));
+        stew3 = stewardFacade.getStewardWithId(stewardFacade.createSteward(s3));
+        
+        flightCreationalDTO1.setAirplane(air1);
         flightCreationalDTO1.setArrival(date2);
         flightCreationalDTO1.setDeparture(date1);
-        flightCreationalDTO1.setOrigin(d1);
-        flightCreationalDTO1.setDestination(d2);
-        flightCreationalDTO1.addSteward(s1);
-        flightCreationalDTO1.addSteward(s2);
+        flightCreationalDTO1.setOrigin(dest1);
+        flightCreationalDTO1.setDestination(dest2);
+        flightCreationalDTO1.addSteward(stew1);
+        flightCreationalDTO1.addSteward(stew2);
         
-        flightCreationalDTO2.setAirplane(a2);
+        flightCreationalDTO2.setAirplane(air2);
         flightCreationalDTO2.setArrival(date3);
         flightCreationalDTO2.setDeparture(date2);
-        flightCreationalDTO2.setOrigin(d2);
-        flightCreationalDTO2.setDestination(d1);
-        flightCreationalDTO2.addSteward(s1);
+        flightCreationalDTO2.setOrigin(dest2);
+        flightCreationalDTO2.setDestination(dest1);
+        flightCreationalDTO2.addSteward(stew1);
         
-        flightDTO.setAirplane(a1);
+        flightDTO.setAirplane(air1);
         flightDTO.setArrival(date2);
         flightDTO.setDeparture(date1);
-        flightDTO.setOrigin(d1);
-        flightDTO.setDestination(d2);
-        flightDTO.addSteward(s1);
-        flightDTO.addSteward(s2);
+        flightDTO.setOrigin(dest1);
+        flightDTO.setDestination(dest2);
+        flightDTO.addSteward(stew1);
+        flightDTO.addSteward(stew2);
     }
     
     @Test
@@ -231,9 +244,9 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         Long id = flightFacade.createFlight(flightCreationalDTO1);
         UpdateFlightDestinationDTO update = new UpdateFlightDestinationDTO();
         update.setId(id);
-        update.setDestination(d1);
+        update.setDestination(dest1);
         flightFacade.updateFlightDestination(update);
-        assert d1.equals(flightFacade.getFlightWithId(id).getDestination());
+        assert dest1.equals(flightFacade.getFlightWithId(id).getDestination());
     }
 //    public void updateFlightOrigin(UpdateFlightOriginDTO update);
     @Test
@@ -241,9 +254,9 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         Long id = flightFacade.createFlight(flightCreationalDTO1);
         UpdateFlightOriginDTO update = new UpdateFlightOriginDTO();
         update.setId(id);
-        update.setOrigin(d2);
+        update.setOrigin(dest2);
         flightFacade.updateFlightOrigin(update);
-        assert d2.equals(flightFacade.getFlightWithId(id).getOrigin());
+        assert dest2.equals(flightFacade.getFlightWithId(id).getOrigin());
     }
 //    public void updateFlightAirplane(UpdateFlightsAirplaneDTO update);
     @Test
@@ -251,15 +264,17 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
         Long id = flightFacade.createFlight(flightCreationalDTO1);
         UpdateFlightsAirplaneDTO update = new UpdateFlightsAirplaneDTO();
         update.setId(id);
-        update.setAirplane(a2);
+        update.setAirplane(air2);
         flightFacade.updateFlightAirplane(update);
-        assert a2.equals(flightFacade.getFlightWithId(id).getAirplane());
+        FlightDTO f = flightFacade.getFlightWithId(id);
+        AirplaneDTO a = flightFacade.getFlightWithId(id).getAirplane();
+        assertEquals(air2, flightFacade.getFlightWithId(id).getAirplane());
     }
 //    public List<FlightDTO> getFlightsByOrigin(Destination origin);
     @Test
     public void testGetFlightsByOrigin() {
-        flightFacade.createFlight(flightCreationalDTO1);
-        List<FlightDTO> l1 = flightFacade.getFlightsByOrigin(d1);
+        Long id = flightFacade.createFlight(flightCreationalDTO1);
+        List<FlightDTO> l1 = flightFacade.getFlightsByOrigin(dest1);
         List<FlightDTO> l2 = new ArrayList<>();
         l2.add(flightDTO);
         Assert.assertEquals(l1, l2);
@@ -268,7 +283,7 @@ public class FlightFacadeTest extends AbstractTransactionalTestNGSpringContextTe
     @Test
     public void testGetFlightsByDestination() {
         flightFacade.createFlight(flightCreationalDTO1);
-        List<FlightDTO> l1 = flightFacade.getFlightsByDestination(d2);
+        List<FlightDTO> l1 = flightFacade.getFlightsByDestination(dest2);
         List<FlightDTO> l2 = new ArrayList<>();
         l2.add(flightDTO);
         Assert.assertEquals(l1, l2);
