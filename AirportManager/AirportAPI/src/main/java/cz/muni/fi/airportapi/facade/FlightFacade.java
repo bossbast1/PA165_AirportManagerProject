@@ -6,6 +6,7 @@
 package cz.muni.fi.airportapi.facade;
 
 import cz.muni.fi.airport.entity.Destination;
+import cz.muni.fi.airportapi.dto.DestinationDTO;
 import cz.muni.fi.airportapi.dto.FlightCreationalDTO;
 import cz.muni.fi.airportapi.dto.FlightDTO;
 import cz.muni.fi.airportapi.dto.UpdateFlightsAirplaneDTO;
@@ -100,7 +101,7 @@ public interface FlightFacade {
      * @param origin Destination to be sorted by.
      * @return list of flights flying from given origin
      */
-    public List<FlightDTO> getFlightsByOrigin(Destination origin);
+    public List<FlightDTO> getFlightsByOrigin(DestinationDTO origin);
     
     /**
      * Lists Flights by destination.
@@ -108,5 +109,5 @@ public interface FlightFacade {
      * @param destination Destination to be sorted by.
      * @return list of flights flying to given destination
      */
-    public List<FlightDTO> getFlightsByDestination(Destination destination);   
+    public List<FlightDTO> getFlightsByDestination(DestinationDTO destination);   
 }

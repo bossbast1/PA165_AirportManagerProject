@@ -5,8 +5,6 @@
  */
 package cz.muni.fi.airportapi.dto;
 
-import cz.muni.fi.airport.entity.Airplane;
-import cz.muni.fi.airport.entity.Flight;
 import java.util.Objects;
 
 /**
@@ -16,7 +14,7 @@ import java.util.Objects;
 public class UpdateFlightsAirplaneDTO {
     
     private Long id;
-    private Airplane airplane;
+    private AirplaneDTO airplane;
     
      @Override
     public int hashCode() {
@@ -51,14 +49,14 @@ public class UpdateFlightsAirplaneDTO {
     /**
      * @return the airplane
      */
-    public Airplane getAirplane() {
+    public AirplaneDTO getAirplane() {
         return airplane;
     }
 
     /**
      * @param airplane the airplane to set
      */
-    public void setAirplane(Airplane airplane) {
+    public void setAirplane(AirplaneDTO airplane) {
         this.airplane = airplane;
     }
 

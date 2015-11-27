@@ -66,12 +66,12 @@ public interface FlightService {
      * @param origin the destination origin that the flight is listed by 
      * @return all flight entities sorted by origin
      */
-    public List<Flight> listByOrigin(Destination origin);
+    public List<Flight> listByOrigin(Long id);
     
     /**
      * Lists all persisted flights entities departing to the destination
      * @param destination the destination that the flight is listed by 
      * @return all flight entities sorted by destination
      */
-    public List<Flight> listByDestination(Destination destination);
+    public List<Flight> listByDestination(Long id);
 }

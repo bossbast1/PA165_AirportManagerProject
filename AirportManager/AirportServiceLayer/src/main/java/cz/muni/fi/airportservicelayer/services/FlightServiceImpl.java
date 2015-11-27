@@ -80,18 +80,18 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public List<Flight> listByOrigin(Destination origin) {
+    public List<Flight> listByOrigin(Long id) {
         try {
-            return flightDao.listByOrigin(origin);
+            return flightDao.listByOrigin(id);
         }catch (Exception e) {
             throw new IllegalArgumentDataException("Exception on listByOrigin in FlightDao", e);
         }
     }
 
     @Override
-    public List<Flight> listByDestination(Destination destination) {
+    public List<Flight> listByDestination(Long id) {
         try {
-            return flightDao.listByDestination(destination);
+            return flightDao.listByDestination(id);
         }catch (Exception e) {
             throw new IllegalArgumentDataException("Exception on listByDestination in FlightDao", e);
         }

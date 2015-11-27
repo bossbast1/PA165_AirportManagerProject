@@ -169,15 +169,15 @@ public class FlightServiceTest extends AbstractTransactionalTestNGSpringContextT
     public void listByOrigin() {
         List l = new ArrayList<>();
         l.add(f1);
-        when(flightDao.listByOrigin(d1)).thenReturn(l);
-        Assert.assertEquals(flightService.listByOrigin(d1), l);
+        when(flightDao.listByOrigin(d1.getId())).thenReturn(l);
+        Assert.assertEquals(flightService.listByOrigin(d1.getId()), l);
     }
     
     @Test
     public void listByDestination() {
         List l = new ArrayList<>();
         l.add(f1);
-        when(flightDao.listByDestination(d2)).thenReturn(l);
-        Assert.assertEquals(flightService.listByDestination(d2), l);
+        when(flightDao.listByDestination(d2.getId())).thenReturn(l);
+        Assert.assertEquals(flightService.listByDestination(d2.getId()), l);
     }
 }

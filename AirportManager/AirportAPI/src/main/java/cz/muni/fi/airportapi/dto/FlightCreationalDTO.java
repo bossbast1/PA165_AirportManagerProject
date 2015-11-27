@@ -4,11 +4,6 @@
  * and open the template in the editor.
  */
 package cz.muni.fi.airportapi.dto;
-
-import cz.muni.fi.airport.entity.Airplane;
-import cz.muni.fi.airport.entity.Destination;
-import cz.muni.fi.airport.entity.Flight;
-import cz.muni.fi.airport.entity.Steward;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -39,18 +34,18 @@ public class FlightCreationalDTO {
     
     @NotNull
     @ManyToOne
-    private DestinationCreationalDTO origin;
+    private DestinationDTO origin;
     
     @NotNull
     @ManyToOne
-    private DestinationCreationalDTO destination;
+    private DestinationDTO destination;
     
     @NotNull
     @ManyToOne
-    private AirplaneCreationalDTO airplane;
+    private AirplaneDTO airplane;
     
     @ManyToMany
-    private List<StewardCreationalDTO> stewards = new ArrayList<>(); 
+    private List<StewardDTO> stewards = new ArrayList<StewardDTO>(); 
     
     /**
      * @return the arrival
@@ -81,13 +76,55 @@ public class FlightCreationalDTO {
     }
 
     /**
+     * @return the origin
+     */
+    public DestinationDTO getOrigin() {
+        return origin;
+    }
+
+    /**
+     * @param origin the origin to set
+     */
+    public void setOrigin(DestinationDTO origin) {
+        this.origin = origin;
+    }
+
+    /**
+     * @return the destination
+     */
+    public DestinationDTO getDestination() {
+        return destination;
+    }
+
+    /**
+     * @param destination the destination to set
+     */
+    public void setDestination(DestinationDTO destination) {
+        this.destination = destination;
+    }
+
+    /**
+     * @return the airplane
+     */
+    public AirplaneDTO getAirplane() {
+        return airplane;
+    }
+
+    /**
+     * @param airplane the airplane to set
+     */
+    public void setAirplane(AirplaneDTO airplane) {
+        this.airplane = airplane;
+    }
+    
+    /**
      * @return the stewards
      */
-    public List<StewardCreationalDTO> getStewards() {
+    public List<StewardDTO> getStewards() {
         return Collections.unmodifiableList(stewards);
     }
     
-    public void addSteward(StewardCreationalDTO s) {
+    public void addSteward(StewardDTO s) {
         stewards.add(s);
     }
         
@@ -128,47 +165,4 @@ public class FlightCreationalDTO {
         }
         return true;
     }
-
-    /**
-     * @return the origin
-     */
-    public DestinationCreationalDTO getOrigin() {
-        return origin;
-    }
-
-    /**
-     * @param origin the origin to set
-     */
-    public void setOrigin(DestinationCreationalDTO origin) {
-        this.origin = origin;
-    }
-
-    /**
-     * @return the destination
-     */
-    public DestinationCreationalDTO getDestination() {
-        return destination;
-    }
-
-    /**
-     * @param destination the destination to set
-     */
-    public void setDestination(DestinationCreationalDTO destination) {
-        this.destination = destination;
-    }
-
-    /**
-     * @return the airplane
-     */
-    public AirplaneCreationalDTO getAirplane() {
-        return airplane;
-    }
-
-    /**
-     * @param airplane the airplane to set
-     */
-    public void setAirplane(AirplaneCreationalDTO airplane) {
-        this.airplane = airplane;
-    }
-
 }

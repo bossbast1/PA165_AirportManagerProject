@@ -5,10 +5,6 @@
  */
 package cz.muni.fi.airportapi.dto;
 
-import cz.muni.fi.airport.entity.Airplane;
-import cz.muni.fi.airport.entity.Destination;
-import cz.muni.fi.airport.entity.Flight;
-import cz.muni.fi.airport.entity.Steward;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -65,6 +61,13 @@ public class FlightDTO {
     }
 
     /**
+     * @param origin the origin to set
+     */
+    public void setOrigin(DestinationDTO origin) {
+        this.origin = origin;
+    }
+
+    /**
      * @return the destination
      */
     public DestinationDTO getDestination() {
@@ -72,10 +75,24 @@ public class FlightDTO {
     }
 
     /**
+     * @param destination the destination to set
+     */
+    public void setDestination(DestinationDTO destination) {
+        this.destination = destination;
+    }
+
+    /**
      * @return the airplane
      */
     public AirplaneDTO getAirplane() {
         return airplane;
+    }
+
+    /**
+     * @param airplane the airplane to set
+     */
+    public void setAirplane(AirplaneDTO airplane) {
+        this.airplane = airplane;
     }
     
         
@@ -133,26 +150,5 @@ public class FlightDTO {
     
     public void addSteward(StewardDTO s) {
         getStewards().add(s);
-    }
-
-    /**
-     * @param origin the origin to set
-     */
-    public void setOrigin(DestinationDTO origin) {
-        this.origin = origin;
-    }
-
-    /**
-     * @param destination the destination to set
-     */
-    public void setDestination(DestinationDTO destination) {
-        this.destination = destination;
-    }
-
-    /**
-     * @param airplane the airplane to set
-     */
-    public void setAirplane(AirplaneDTO airplane) {
-        this.airplane = airplane;
     }
 }
