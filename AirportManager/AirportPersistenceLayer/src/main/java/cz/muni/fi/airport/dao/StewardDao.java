@@ -69,7 +69,18 @@ public interface StewardDao {
      */
     public  List<Steward> findAll();
     
+    /**
+     * Find stewards, that are not asigned to any flight during given period
+     * @param fromDate from
+     * @param toDate to
+     * @return 
+     */
     public List<Steward> findAvailableStewards(Date fromDate, Date toDate);  
 
+    /**
+     * Find steward's last flights (from the latest to earlier)
+     * @param steward
+     * @return 
+     */
     public List<Flight> findLastStewardFlights(Steward steward);
 }
