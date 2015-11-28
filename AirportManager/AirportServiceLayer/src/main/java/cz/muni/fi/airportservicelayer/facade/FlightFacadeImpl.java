@@ -8,6 +8,7 @@ package cz.muni.fi.airportservicelayer.facade;
 import cz.muni.fi.airport.entity.Airplane;
 import cz.muni.fi.airport.entity.Destination;
 import cz.muni.fi.airport.entity.Flight;
+import cz.muni.fi.airport.entity.Steward;
 import cz.muni.fi.airportapi.dto.DestinationDTO;
 import cz.muni.fi.airportapi.dto.FlightCreationalDTO;
 import cz.muni.fi.airportapi.dto.FlightDTO;
@@ -68,6 +69,9 @@ public class FlightFacadeImpl implements FlightFacade {
     @Override
     public Long createFlight(FlightCreationalDTO f) {
         Flight mappedF = beanMappingservice.mapTo(f, Flight.class);
+        for (Steward steward : beanMappingservice.mapTo(f.getStewards(), Steward.class)) {
+            mappedF.addSteward(steward);
+        }
         flightService.create(mappedF);
         return mappedF.getId();
     }
