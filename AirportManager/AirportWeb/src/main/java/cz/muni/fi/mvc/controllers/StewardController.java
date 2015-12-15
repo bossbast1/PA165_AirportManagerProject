@@ -7,6 +7,7 @@ package cz.muni.fi.mvc.controllers;
 
 import cz.muni.fi.airportapi.dto.*;
 import cz.muni.fi.airportapi.facade.StewardFacade;
+import cz.muni.fi.airportservicelayer.config.FacadeTestConfiguration;
 import cz.muni.fi.airportservicelayer.config.ServiceTestConfiguration;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -32,7 +33,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * SpringMVC Controller for Steward managment
  * @author Sebastian Kupka
  */
-@Import({ServiceTestConfiguration.class})
+@Import({FacadeTestConfiguration.class})
 @RequestMapping("/steward")
 @Controller
 public class StewardController {
@@ -121,34 +122,34 @@ public class StewardController {
         return "steward/list";
     }
 
-    /**
-     * Shows a list of stewards which are available at given location at given time.
-     * @param locationId id of lacation, for which we want to find stewards
-     * @param dateFromStr available from date
-     * @param dateToStr available to date
-     * @param model display data
-     * @return jsp page
-     */
-    @RequestMapping()
-    public String list(@RequestParam(value="locationId", required = false) Long locationId,
-            @RequestParam(value="dateFromStr", required = false) String dateFromStr,
-            @RequestParam(value="dateToStr", required = false) String dateToStr,          
-            Model model) {
-        
-        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-        Date dateFrom = null;
-        try {
-            dateFrom = formatter.parse(dateFromStr);
-        } catch (ParseException ex) {
-            log.debug("Parsing error - ignoring From Date", ex);
-        }
-        Date dateTo = null;
-        try {
-            dateTo = formatter.parse(dateToStr);
-        } catch (ParseException ex) {
-            log.debug("Parsing error - ignoring To Date", ex);
-        }
-        model.addAttribute("stewards", stewardFacade.findSpecificStewards(dateFrom, dateTo, locationId));
-        return "steward/list";
-    }
+//    /**
+//     * Shows a list of stewards which are available at given location at given time.
+//     * @param locationId id of lacation, for which we want to find stewards
+//     * @param dateFromStr available from date
+//     * @param dateToStr available to date
+//     * @param model display data
+//     * @return jsp page
+//     */
+//    @RequestMapping()
+//    public String list(@RequestParam(value="locationId", required = false) Long locationId,
+//            @RequestParam(value="dateFromStr", required = false) String dateFromStr,
+//            @RequestParam(value="dateToStr", required = false) String dateToStr,          
+//            Model model) {
+//        
+//        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+//        Date dateFrom = null;
+//        try {
+//            dateFrom = formatter.parse(dateFromStr);
+//        } catch (ParseException ex) {
+//            log.debug("Parsing error - ignoring From Date", ex);
+//        }
+//        Date dateTo = null;
+//        try {
+//            dateTo = formatter.parse(dateToStr);
+//        } catch (ParseException ex) {
+//            log.debug("Parsing error - ignoring To Date", ex);
+//        }
+//        model.addAttribute("stewards", stewardFacade.findSpecificStewards(dateFrom, dateTo, locationId));
+//        return "steward/list";
+//    }
 }

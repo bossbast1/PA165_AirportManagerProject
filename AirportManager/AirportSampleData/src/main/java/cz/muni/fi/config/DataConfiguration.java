@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 
 /**
  * @author Jakub Stromský
+ * @author Sebastian Kupka
  */
 @Configuration
 @Import(ServiceTestConfiguration.class)

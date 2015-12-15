@@ -8,6 +8,7 @@ package cz.muni.fi.mvc.controllers;
 import cz.muni.fi.airportapi.dto.DestinationCreationalDTO;
 import cz.muni.fi.airportapi.dto.DestinationDTO;
 import cz.muni.fi.airportapi.facade.DestinationFacade;
+import cz.muni.fi.airportservicelayer.config.FacadeTestConfiguration;
 import cz.muni.fi.airportservicelayer.config.ServiceTestConfiguration;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -30,7 +31,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * SpringMVC Controller for Destination management
  * @author Michal Zbranek
  */
-@Import({ServiceTestConfiguration.class})
+@Import({FacadeTestConfiguration.class})
 @RequestMapping("/destination")
 @Controller
 public class DestinationController {
