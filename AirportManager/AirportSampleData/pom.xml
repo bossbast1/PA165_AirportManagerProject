@@ -6,7 +6,14 @@
         <artifactId>AirportManager</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>SampleData</artifactId>
+    <artifactId>AirportSampleData</artifactId>
     <packaging>jar</packaging>
-    <name>AirportSampleData</name>
+    <dependencies>
+        <dependency>
+            <groupId>cz.muni.fi</groupId>
+            <artifactId>AirportServiceLayer</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
 </project>

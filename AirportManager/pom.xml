@@ -48,8 +48,8 @@
         <module>AirportPersistenceLayer</module>
         <module>AirportServiceLayer</module>
         <module>AirportAPI</module>
-    <module>AirportWeb</module>
-        <module>SampleData</module>
+        <module>AirportWeb</module>
+        <module>AirportSampleData</module>
         <module>AirportREST</module>
     </modules>
     
