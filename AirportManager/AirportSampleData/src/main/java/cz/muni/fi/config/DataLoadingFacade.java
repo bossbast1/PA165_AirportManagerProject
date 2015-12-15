@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author jkaspar
+ * @author Jakub Stromský
  */
 @Transactional
 @Component

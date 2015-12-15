@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Import;
 import javax.annotation.PostConstruct;
 
 /**
- * @author jkaspar
+ * @author Jakub Stromský
  */
 @Configuration
 @Import(ServiceTestConfiguration.class)
