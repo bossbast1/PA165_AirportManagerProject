@@ -12,9 +12,6 @@ import org.springframework.context.annotation.Import;
 
 import javax.annotation.PostConstruct;
 
-/**
- * @author jkaspar
- */
 @Configuration
 @Import(ServiceTestConfiguration.class)
 @ComponentScan(basePackageClasses = {DataLoadingFacade.class})

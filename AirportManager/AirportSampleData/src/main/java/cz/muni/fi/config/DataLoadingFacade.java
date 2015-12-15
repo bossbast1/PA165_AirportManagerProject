@@ -19,9 +19,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author jkaspar
- */
 @Transactional
 @Component
 public class DataLoadingFacade {
@@ -105,7 +102,6 @@ public class DataLoadingFacade {
         stewardService.createSteward(s3);
 
         Flight f1 = new Flight();
-        f1.setId(1L);
         f1.setAirplane(a1);
         f1.setArrival(date2);
         f1.setDeparture(date1);
@@ -117,13 +113,12 @@ public class DataLoadingFacade {
         flightService.create(f1);
         
         Flight f2 = new Flight();
-        f2.setId(2L);
         f2.setAirplane(a2);
         f2.setArrival(date3);
         f2.setDeparture(date2);
         f2.setOrigin(d2);
         f2.setDestination(d1);
-        f2.addSteward(s1); 
+        f2.addSteward(s3); 
         
         flightService.create(f2);
     }
