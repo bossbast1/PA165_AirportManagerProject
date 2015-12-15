@@ -1,3 +1,6 @@
 /AirportManager/AirportPersistenceLayer/target/
 /AirportManager/AirportServiceLayer/target/
 /AirportManager/AirportAPI/target
+/AirportManager/AirportWeb/target/
+/AirportManager/AirportREST/target/
+/AirportManager/SampleData/target/
