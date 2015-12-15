@@ -19,6 +19,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Jakub Stromský
+ * @author Sebastian Kupka
+ */
 @Transactional
 @Component
 public class DataLoadingFacade {
